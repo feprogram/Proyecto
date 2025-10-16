@@ -1,0 +1,17 @@
+.contenedor-pagar {
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    height: 50%;
+    gap: 15px;
+
+}
+
+.datos-usuario {
+    display: flex;
+   align-items: center;
+    gap: 15px;
+
+}

@@ -1,0 +1,17 @@
+.contenedor-iniciar {
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    height: 50%;
+    gap: 15px;
+
+}
+
+.gap{
+
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
