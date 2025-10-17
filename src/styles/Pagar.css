@@ -1,17 +1,27 @@
 .contenedor-pagar {
-    margin-top: 5rem;
+  
     display: flex;
     flex-direction: column;
     justify-content: center;
-    text-align: center;
-    height: 50%;
-    gap: 15px;
+    text-align: center; 
+    width: 100%;
+    margin: 0;
+    margin-top: 5rem;
 
 }
 
 .datos-usuario {
     display: flex;
-   align-items: center;
-    gap: 15px;
+    flex-direction: column;
+    margin-left: 5%;
+    text-align: center;
+    width: 15%;
+    
+}
 
+h2
+h3{
+
+
+        margin: 0;
 }

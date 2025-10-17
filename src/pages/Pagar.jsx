@@ -33,13 +33,16 @@ export default function Pagar({
     return (
         <div className="contenedor-pagar">
             <div className="datos-usuario">
-                <h2>Hola: {usuario.nombre}</h2>
-                <h3><p><b>Correo:</b> {usuario.email}</p></h3>
-                <button onClick={cerrarSesion}>Cerrar sesión</button>
-                <hr />
+                <h2 >Hola: {usuario.nombre}</h2>
+                <h3> {usuario.email}</h3>
+            <button onClick={cerrarSesion}>Cerrar sesión</button>
+
             </div>
 
-            <div>
+            
+                
+            <div className="detalle-compra"> 
+                <hr />
                 <h2>Tu compra:</h2>
 
                 {carrito.map((producto) => (
