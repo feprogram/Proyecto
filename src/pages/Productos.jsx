@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../styles/Productos.css";
-import Carrito from "./Carrito";
+import Carrito from "../componentes/Carrito";
+import { useAppContext } from "../context/AppContext";
 
 
 export default function Productos() {
@@ -9,7 +10,8 @@ export default function Productos() {
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
   const [limite, setLimite] = useState(8); // Cantidad de productos visibles
-  const [carrito, setCarrito] = useState([]);
+  const { agregarAlCarrito, carrito, setCarrito} = useAppContext();
+  
 
   useEffect(() => {
     fetch("https://68d9c26590a75154f0db169b.mockapi.io/Api/productos")
@@ -26,11 +28,7 @@ export default function Productos() {
         setCargando(false);
       });
   }, []);
-
-  const agregarAlCarrito = (producto) => {
-    setCarrito([...carrito, producto]);
-    alert(`${producto.nombre} ha sido agregado al carrito.`);
-  };
+  
 
   if (cargando) return <p>Cargando productos...</p>;
   if (error) return <p>{error}</p>;
@@ -85,7 +83,7 @@ export default function Productos() {
               cursor: "pointer",
             }}
           >
-            Ver más
+            Cargar más
           </button>
         )}
       </div>

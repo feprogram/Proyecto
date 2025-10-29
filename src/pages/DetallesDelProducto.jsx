@@ -22,10 +22,10 @@ if (!producto) {
     
     <div className="contenedor-detalles">
   
-    <h2>Detalles del Producto {id}</h2>
+    <h2>Detalles del Producto</h2>
     <ul>
         <li key={producto.id} style={{ listStyle: "none" }}>
-            {producto.nombre}
+            <strong>{producto.nombre}</strong> - (SKU 759 {id})
             <br />
             <p><strong>Descripción: </strong>{producto.descripcion}</p>
             <p><strong>Precio:</strong> ${producto.precio}</p>

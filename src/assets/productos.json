@@ -1,0 +1,242 @@
+[
+  {
+    "nombre": "Fish",
+    "descripcion": "Innovative Mouse featuring sleepy technology and Plastic construction",
+    "avatar": "https://avatars.githubusercontent.com/u/93546073",
+    "precio": "930.29",
+    "categoria": "Engineer",
+    "id": "1"
+  },
+  {
+    "nombre": "Chicken",
+    "descripcion": "Ergonomic Chair made with Cotton for all-day outrageous support",
+    "avatar": "https://avatars.githubusercontent.com/u/64286683",
+    "precio": "809.89",
+    "categoria": "Manager",
+    "id": "2"
+  },
+  {
+    "nombre": "Chips",
+    "descripcion": "Savor the rich essence in our Bike, designed for whole culinary adventures",
+    "avatar": "https://avatars.githubusercontent.com/u/97140973",
+    "precio": "507.55",
+    "categoria": "Strategist",
+    "id": "3"
+  },
+  {
+    "nombre": "Pizza",
+    "descripcion": "Ergonomic Bacon made with Bronze for all-day breakable support",
+    "avatar": "https://avatars.githubusercontent.com/u/72216403",
+    "precio": "997.89",
+    "categoria": "Technician",
+    "id": "4"
+  },
+  {
+    "nombre": "Mouse",
+    "descripcion": "Experience the salmon brilliance of our Chicken, perfect for optimistic environments",
+    "avatar": "https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/male/512/87.jpg",
+    "precio": "715.79",
+    "categoria": "Consultant",
+    "id": "5"
+  },
+  {
+    "nombre": "Bike",
+    "descripcion": "Our golden-inspired Gloves brings a taste of luxury to your worst lifestyle",
+    "avatar": "https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/96.jpg",
+    "precio": "764.99",
+    "categoria": "Developer",
+    "id": "6"
+  },
+  {
+    "nombre": "Ball",
+    "descripcion": "Stylish Shirt designed to make you stand out with elastic looks",
+    "avatar": "https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/84.jpg",
+    "precio": "6.95",
+    "categoria": "Architect",
+    "id": "7"
+  },
+  {
+    "nombre": "Chair",
+    "descripcion": "Our elephant-friendly Salad ensures cultivated comfort for your pets",
+    "avatar": "https://avatars.githubusercontent.com/u/81030156",
+    "precio": "348.19",
+    "categoria": "Orchestrator",
+    "id": "8"
+  },
+  {
+    "nombre": "Salad",
+    "descripcion": "Introducing the Azerbaijan-inspired Bacon, blending breakable style with local craftsmanship",
+    "avatar": "https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/male/512/25.jpg",
+    "precio": "641.09",
+    "categoria": "Assistant",
+    "id": "9"
+  },
+  {
+    "nombre": "Shoes",
+    "descripcion": "The black Sausages combines Luxembourg aesthetics with Thorium-based durability",
+    "avatar": "https://avatars.githubusercontent.com/u/23900840",
+    "precio": "231.49",
+    "categoria": "Planner",
+    "id": "10"
+  },
+  {
+    "nombre": "Pizza",
+    "descripcion": "Stylish Gloves designed to make you stand out with powerless looks",
+    "avatar": "https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/male/512/44.jpg",
+    "precio": "896.50",
+    "categoria": "Coordinator",
+    "id": "11"
+  },
+  {
+    "nombre": "Shoes",
+    "descripcion": "Bechtelar Group's most advanced Table technology increases dim capabilities",
+    "avatar": "https://avatars.githubusercontent.com/u/83750108",
+    "precio": "245.99",
+    "categoria": "Technician",
+    "id": "12"
+  },
+  {
+    "nombre": "Towels",
+    "descripcion": "Experience the lime brilliance of our Bacon, perfect for pointless environments",
+    "avatar": "https://avatars.githubusercontent.com/u/80000665",
+    "precio": "450.49",
+    "categoria": "Executive",
+    "id": "13"
+  },
+  {
+    "nombre": "Gloves",
+    "descripcion": "The white Shoes combines Andorra aesthetics with Krypton-based durability",
+    "avatar": "https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/57.jpg",
+    "precio": "581.59",
+    "categoria": "Strategist",
+    "id": "14"
+  },
+  {
+    "nombre": "Chicken",
+    "descripcion": "The sleek and fortunate Tuna comes with green LED lighting for smart functionality",
+    "avatar": "https://avatars.githubusercontent.com/u/2090293",
+    "precio": "60.35",
+    "categoria": "Manager",
+    "id": "15"
+  },
+  {
+    "nombre": "Car",
+    "descripcion": "Our eagle-friendly Towels ensures expert comfort for your pets",
+    "avatar": "https://avatars.githubusercontent.com/u/84987197",
+    "precio": "307.85",
+    "categoria": "Orchestrator",
+    "id": "16"
+  },
+  {
+    "nombre": "Towels",
+    "descripcion": "Innovative Table featuring biodegradable technology and Steel construction",
+    "avatar": "https://avatars.githubusercontent.com/u/9908350",
+    "precio": "527.59",
+    "categoria": "Orchestrator",
+    "id": "17"
+  },
+  {
+    "nombre": "Tuna",
+    "descripcion": "New Table model with 75 GB RAM, 397 GB storage, and electric features",
+    "avatar": "https://avatars.githubusercontent.com/u/15549381",
+    "precio": "68.29",
+    "categoria": "Engineer",
+    "id": "18"
+  },
+  {
+    "nombre": "Cheese",
+    "descripcion": "Introducing the Cayman Islands-inspired Cheese, blending glass style with local craftsmanship",
+    "avatar": "https://avatars.githubusercontent.com/u/77914409",
+    "precio": "723.85",
+    "categoria": "Officer",
+    "id": "19"
+  },
+  {
+    "nombre": "Gloves",
+    "descripcion": "The Howard Ball is the latest in a series of oily products from Hirthe, Hauck and Fisher",
+    "avatar": "https://avatars.githubusercontent.com/u/96304709",
+    "precio": "364.45",
+    "categoria": "Facilitator",
+    "id": "20"
+  },
+  {
+    "nombre": "Mouse",
+    "descripcion": "Savor the juicy essence in our Chair, designed for official culinary adventures",
+    "avatar": "https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/male/512/42.jpg",
+    "precio": "672.39",
+    "categoria": "Director",
+    "id": "21"
+  },
+  {
+    "nombre": "Chicken",
+    "descripcion": "The indigo Bacon combines Cambodia aesthetics with Astatine-based durability",
+    "avatar": "https://avatars.githubusercontent.com/u/53034685",
+    "precio": "43.46",
+    "categoria": "Supervisor",
+    "id": "22"
+  },
+  {
+    "nombre": "Bike",
+    "descripcion": "Ergonomic Ball made with Granite for all-day peppery support",
+    "avatar": "https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/male/512/89.jpg",
+    "precio": "421.75",
+    "categoria": "Strategist",
+    "id": "23"
+  },
+  {
+    "nombre": "Soap",
+    "descripcion": "Introducing the Samoa-inspired Keyboard, blending useless style with local craftsmanship",
+    "avatar": "https://avatars.githubusercontent.com/u/40751631",
+    "precio": "698.39",
+    "categoria": "Producer",
+    "id": "24"
+  },
+  {
+    "nombre": "Salad",
+    "descripcion": "Discover the crocodile-like agility of our Car, perfect for defenseless users",
+    "avatar": "https://avatars.githubusercontent.com/u/99142343",
+    "precio": "2.59",
+    "categoria": "Analyst",
+    "id": "25"
+  },
+  {
+    "nombre": "Bacon",
+    "descripcion": "Bespoke Chair designed with Wooden for powerless performance",
+    "avatar": "https://avatars.githubusercontent.com/u/61562533",
+    "precio": "762.99",
+    "categoria": "Representative",
+    "id": "26"
+  },
+  {
+    "nombre": "Tuna",
+    "descripcion": "The Idella Pizza is the latest in a series of pale products from Green - Waelchi",
+    "avatar": "https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/male/512/20.jpg",
+    "precio": "109.30",
+    "categoria": "Strategist",
+    "id": "27"
+  },
+  {
+    "nombre": "Cheese",
+    "descripcion": "The Desmond Hat is the latest in a series of neighboring products from Klein LLC",
+    "avatar": "https://avatars.githubusercontent.com/u/34424709",
+    "precio": "206.95",
+    "categoria": "Planner",
+    "id": "28"
+  },
+  {
+    "nombre": "Ball",
+    "descripcion": "The Devolved interactive knowledge user Fish offers reliable performance and optimal design",
+    "avatar": "https://avatars.githubusercontent.com/u/53344183",
+    "precio": "145.09",
+    "categoria": "Representative",
+    "id": "29"
+  },
+  {
+    "nombre": "Soap",
+    "descripcion": "The Reverse-engineered regional software Ball offers reliable performance and slushy design",
+    "avatar": "https://avatars.githubusercontent.com/u/64308413",
+    "precio": "929.75",
+    "categoria": "Producer",
+    "id": "30"
+  }
+]

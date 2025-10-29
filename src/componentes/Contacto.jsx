@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { useState } from 'react';
 
+
 function Contacto() {
   const [nombre, setNombre] = useState(''); 
   const [correo, setCorreo] = useState('');
@@ -17,7 +18,7 @@ function Contacto() {
   };
 
   return (
-    <div id="tarjeta">
+    <div>
         <h5>useState con evento onSubmit </h5>
         <h2>Formulario de Envío</h2>
 
@@ -43,6 +44,7 @@ function Contacto() {
         </div>
         <hr />
         <button type="submit">Enviar</button>
+
       </form>
 
       <div>
@@ -51,6 +53,7 @@ function Contacto() {
       </div>
     </div>
   );
+  
 }
 
 export default Contacto;
