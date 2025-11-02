@@ -13,15 +13,20 @@ import RutaProtegida from "./pages/RutaProtegida";
 import IniciarSesion from "./componentes/IniciarSesion";
 import ProductoDetalle from "./pages/DetallesDelProducto";
 import Footer from "./componentes/Footer";
-import { AppProvider } from "./context/AppContext";
+import { AuthProvider } from "./context/AuthContext";
+import { CartProvider } from "./context/CartContext";
+import Dashboard from "./pages/Dasboard";
+import FormularioProducto from "./componentes/FormularioProducto";
+
+// Combinando ambos proveedores en uno solo para simplificar
 
 
 function App() {
   return (
-    <AppProvider>
+    <AuthProvider>
+      <CartProvider>
       <div className="container">
         <NavBar />
-
         <Routes className="content">
           <Route path="/" element={<Inicio />} />
           <Route path="/productos" element={<Productos />} />
@@ -31,11 +36,16 @@ function App() {
           <Route path="/nosotros" element={<Nosotros />} />
           <Route path="/contacto" element={<Contacto />} />
           <Route path="/IniciarSesion" element={<IniciarSesion />} />
-          <Route path="/pagar" element={<RutaProtegida><Pagar /></RutaProtegida>}/>
+          <Route path="/pagar" element={<RutaProtegida><Pagar /></RutaProtegida>}/> 
+          <Route path="/dashboard" element={<RutaProtegida soloAdmin={true}><Dashboard /></RutaProtegida>} />
+          <Route path="/agregar-producto" element={<RutaProtegida soloAdmin={true}><FormularioProducto/></RutaProtegida>} />
+          
         </Routes>
         <Footer />
       </div>
-    </AppProvider>
+        </CartProvider>
+        </AuthProvider>
+
   );
 }
 

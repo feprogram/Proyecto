@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../styles/Productos.css";
 import Carrito from "../componentes/Carrito";
-import { useAppContext } from "../context/AppContext";
+import { useCartContext } from "../context/CartContext";
 
 
 export default function Productos() {
@@ -10,7 +10,7 @@ export default function Productos() {
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
   const [limite, setLimite] = useState(8); // Cantidad de productos visibles
-  const { agregarAlCarrito, carrito, setCarrito} = useAppContext();
+  const { agregarAlCarrito, carrito, setCarrito} = useCartContext();
   
 
   useEffect(() => {

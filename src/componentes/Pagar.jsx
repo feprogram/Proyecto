@@ -1,12 +1,14 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import "../styles/Pagar.css";
-import { useAppContext } from "../context/AppContext";
+import { useAuthContext } from "../context/AuthContext";
+import { useCartContext } from "../context/CartContext";
 
 export default function Pagar() {
-  const { usuario, cerrarSesion, carrito, vaciarCarrito } = useAppContext();
-  const location = useLocation();
+  const { usuario, cerrarSesion } = useAuthContext();
+  const { carrito, total, vaciarCarrito } = useCartContext();
+  // const location = useLocation();
   const navigate = useNavigate();
-
+  const tokenActual = localStorage.getItem('authtoken');
   // // Calculo del total
   // const total = carrito.reduce(
   //     (suma, producto) => suma + Number(producto.precio),
@@ -15,11 +17,11 @@ export default function Pagar() {
 
   // Calculo del total
   // Calcula el total x cantidad y muestra precio x unidad
-  const total = carrito.reduce((suma, producto) => {
-    const cantidad = Number(producto.cantidad || 1);
-    const precioUnitario = Number(producto.precio || 0);
-    return suma + cantidad * precioUnitario;
-  }, 0);
+  // const total = carrito.reduce((suma, producto) => {
+  //   const cantidad = Number(producto.cantidad || 1);
+  //   const precioUnitario = Number(producto.precio || 0);
+  //   return suma + cantidad * precioUnitario;
+  // }, 0);
 
   // Función para finalizar compra
   const comprar = () => {
@@ -30,6 +32,24 @@ export default function Pagar() {
 
   return (
     <div className="contenedor-pagar">
+      <div>
+        <h2>Hola {usuario.nombre}</h2>
+        <p>Email: {usuario.email}</p>
+       
+        {/* Estilo para el Token */}
+        <div style={{
+          background: '#f0f0f0',
+          padding: '8px',
+          borderRadius: '4px',
+          margin: '10px 0',
+          fontSize: '12px',
+          wordBreak: 'break-all'
+        }}>
+          <strong>Token:</strong> {tokenActual}
+        </div>
+        <button onClick={cerrarSesion}>Cerrar sesión</button>
+        <hr />
+      </div>
       {/* <div className="datos-usuario">
                 <h2 >Hola: {usuario.nombre}</h2>
                 <h3> {usuario.email}</h3>

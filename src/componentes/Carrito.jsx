@@ -1,13 +1,16 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useAppContext } from "../context/AppContext";
-
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useCartContext } from "../context/CartContext";
 
 export default function CarritoCompras() {
-
-  const { carrito, vaciarCarrito, setCarrito, isAuthenticated } = useAppContext();
+  const { carrito, vaciarCarrito, agregarCantidad, quitarCantidad, total } = useCartContext();
 
   const navigate = useNavigate();
+
+  //useLocation para obtener la ruta actual. Esto nos ayuda a condicionar la renderización del botón "Seguir Comprando". Es decir: si
+  //en el path "productos" no muestra el botón seguir comprando pero si estamos en el path "carrito" si lo muestra.
+  const location = useLocation();
+  const currentPath = location.pathname;
 
   const irAPagar = () => {
     navigate("/pagar", { state: { carrito } });
@@ -15,41 +18,9 @@ export default function CarritoCompras() {
 
   // const total = carrito.reduce((sum, item) => sum + Number(item.precio), 0);
 
-const quitarCantidad = (idProducto) => {
-    const carritoActualizado = carrito.map(producto => {
-      if (producto.id === idProducto) {
-        const cantidadActual = producto.cantidad || 1;
-        if (cantidadActual === 1) {
-          return null;
-        }
-        return { ...producto, cantidad: cantidadActual - 1 };
-      }
-      return producto;
-    }).filter(producto => producto !== null);
-
-    setCarrito(carritoActualizado);
-  };
-
-    const agregarCantidad = (idProducto) => {
-    const nuevoCarrito = carrito.map(producto => {
-      if (producto.id === idProducto) {
-        return {
-          ...producto,
-          cantidad: (producto.cantidad || 1) + 1
-        };
-      }
-      return producto;
-    });
-    setCarrito(nuevoCarrito);
-  };
-
-   const total = carrito.reduce((sum, item) => {
-    const cantidad = item.cantidad || 1;
-    return sum + (Number(item.precio) * cantidad);
-  }, 0);
-
+  
   return (
-    <div>
+    <div style={{ margin: "4rem" }}>
       <hr />
       <h2>Carrito de Compras</h2>
       {carrito.length === 0 ? (
@@ -58,10 +29,10 @@ const quitarCantidad = (idProducto) => {
         <>
           {carrito.map((item) => (
             <div key={item.id}>
-                {item.nombre} - ${Number(item.precio).toFixed(3)}
-                (Cantidad: {item.cantidad || 1})
-                <button onClick={() => quitarCantidad(item.id)}>-</button>
-                <button onClick={() => agregarCantidad(item.id)}>+</button>
+              {item.nombre} - ${Number(item.precio).toFixed(3)}
+              (Cantidad: {item.cantidad || 1})
+              <button onClick={() => quitarCantidad(item.id)}>-</button>
+              <button onClick={() => agregarCantidad(item.id)}>+</button>
             </div>
           ))}
           <div>
@@ -70,6 +41,17 @@ const quitarCantidad = (idProducto) => {
           </div>
           <button onClick={vaciarCarrito}>Vaciar Carrito</button>
           <button onClick={irAPagar}>Pagar</button>
+
+          {/* Este boton sirve para seguir comprando pero tiene la carateristica de que solo se muestra si estamos en la ruta "/carrito"
+         Para eso usamos useLocation para obtener la ruta actual. Esto nos ayuda a condicionar la renderización del botón "Seguir Comprando". Es decir: si
+         en el path "productos" no muestra el botón seguir comprando pero si estamos en el path "carrito" si lo muestra.Mostrar el botón solo si estamos en "/carrito" */}
+          <div>
+            {currentPath === "/carrito" && (
+              <button onClick={() => navigate("/productos")}>
+                Seguir Comprando
+              </button>
+            )}
+          </div>
         </>
       )}
       <hr />
