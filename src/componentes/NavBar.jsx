@@ -43,7 +43,7 @@ function NavBar() {
               </button>
             </div>
           ) : (
-            <Link to="/iniciar-sesion">IniciarSesión</Link>
+            <Link to="/iniciarSesion">IniciarSesión</Link>
           )}
         </li>
 

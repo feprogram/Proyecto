@@ -69,7 +69,7 @@ function FormularioProducto() {
         precio: producto.precio.replace(',', '.')
       };
 
-      const respuesta = await fetch('https://68d482e3214be68f8c696ae2.mockapi.io/api/productos', {
+      const respuesta = await fetch('https://68d9c26590a75154f0db169b.mockapi.io/Api/productos', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(productoEnviar),
