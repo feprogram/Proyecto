@@ -1,17 +1,25 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/Productos.css";
 import Carrito from "../componentes/Carrito";
 import { useCartContext } from "../context/CartContext";
-
+import { useAuthContext } from "../context/AuthContext";
 
 export default function Productos() {
   const [productos, setProductos] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
-  const [limite, setLimite] = useState(8); // Cantidad de productos visibles
-  const { agregarAlCarrito, carrito, setCarrito} = useCartContext();
-  
+  const [limite, setLimite] = useState(25); // Cantidad de productos visibles
+  const { agregarAlCarrito, carrito, setCarrito } = useCartContext();
+  const navigate = useNavigate();
+
+  //Contexto
+  // const {agregarAlCarrito} = useCartContext();
+
+  // Autenticación
+  const { usuario } = useAuthContext();
+
+  const esAdmin = usuario?.nombre === "admin";
 
   useEffect(() => {
     fetch("https://68d9c26590a75154f0db169b.mockapi.io/Api/productos")
@@ -28,7 +36,6 @@ export default function Productos() {
         setCargando(false);
       });
   }, []);
-  
 
   if (cargando) return <p>Cargando productos...</p>;
   if (error) return <p>{error}</p>;
@@ -42,6 +49,7 @@ export default function Productos() {
           {productosVisibles.map((producto) => (
             <li id="lista-productos li" key={producto.id}>
               <h3 style={{ margin: "0" }}>{producto.nombre}</h3>
+              <p style={{margin:"0"}}><strong><i>{producto.categoria}</i></strong></p>
               <p style={{ margin: "0" }}>{producto.descripcion}</p>
               <img
                 src={producto.avatar}
@@ -54,19 +62,45 @@ export default function Productos() {
               <div
                 style={{
                   display: "flex",
+                  flexWrap: "wrap",
                   justifyContent: "center",
                   alignItems: "center",
                   gap: "5px",
-                  padding: "0",
+                  padding: "0px",
                   margin: "0",
                 }}
-              >
-                <Link to={`/productos/${producto.categoria || "Sin Categoria" }/${producto.id}`} state={{ producto }}>
-                  <button>+Info</button>
+                  >
+                <Link 
+                  to={`/productos/${producto.categoria || "Sin Categoria"}/${
+                    producto.id
+                  }`}
+                  state={{ producto }}>
+                  <button style={{backgroundColor:"#4fe460ff"}}>+Info</button>
                 </Link>
                 <button onClick={() => agregarAlCarrito(producto)}>
                   Comprar
                 </button>
+
+                {/* Botón Editar - SOLO visible para admin */}
+                {esAdmin && (
+                  <div>
+                    
+                    <button
+                      onClick={() =>
+                        navigate("/editar-productos", {
+                          state: { producto: producto },
+                        })
+                      }
+                      style={{
+                        backgroundColor: "#28a745",
+                        color: "white",
+                        marginRight: "10px",
+                      }}
+                    >
+                      Editar
+                    </button>
+                  </div>
+                )}
               </div>
             </li>
           ))}

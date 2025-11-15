@@ -17,6 +17,7 @@ import { AuthProvider } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
 import Dashboard from "./pages/Dasboard";
 import FormularioProducto from "./componentes/FormularioProducto";
+import EditarProductos from "./componentes/EditarProductos";
 
 // Combinando ambos proveedores en uno solo para simplificar
 
@@ -38,6 +39,7 @@ function App() {
           <Route path="/IniciarSesion" element={<IniciarSesion />} />
           <Route path="/pagar" element={<RutaProtegida><Pagar /></RutaProtegida>}/> 
           <Route path="/dashboard" element={<RutaProtegida soloAdmin={true}><Dashboard /></RutaProtegida>} />
+          <Route path="/editar-productos" element={<RutaProtegida soloAdmin={true}><EditarProductos /></RutaProtegida>} />
           <Route path="/agregar-producto" element={<RutaProtegida soloAdmin={true}><FormularioProducto/></RutaProtegida>} />
           
         </Routes>

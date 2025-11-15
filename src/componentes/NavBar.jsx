@@ -1,12 +1,26 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate} from 'react-router-dom'
 import "../styles/NavBar.css"
 import ShoppingCartIcon from "../assets/iconoCarrito"
 import { useAuthContext } from '../context/AuthContext'
+import { useCartContext } from '../context/CartContext'
 
 function NavBar() {
   
   const { isAuthenticated, usuario, carrito, cerrarSesion } = useAuthContext();
+  const { vaciarCarrito } = useCartContext();
+  const navigate = useNavigate();
+
+ const manejarCerrarSesion = () => {
+    navigate("/productos");
+
+    // Tiempo 1'' para asegurar la navegación
+    setTimeout(() => {
+      vaciarCarrito();
+      cerrarSesion();
+    }, 100);
+  };
+
 
   return (
     
@@ -19,18 +33,9 @@ function NavBar() {
             <li className="li"><Link to="/carrito"><ShoppingCartIcon size={24} color="#e3e3e3"/></Link></li>
             <li className="li"><Link to="/nosotros">Nosotros</Link></li>
             <li className="li"><Link to="/contacto">Contacto</Link></li>
-            {/* <li>{!isAuthenticated ? (<Link to="/iniciarSesion">Iniciar Sesión</Link>) :(
-              <div>
-                <span>Hola, {usuario.nombre}</span>
-                <hr />
-                <button onClick={cerrarSesion}>Cerrar Sesión</button>
-              </div>
-          )}</li> */}
-
- <li>
-          {isAuthenticated ? (
-            <div>
-              <span>Hola, {usuario.nombre}</span>
+           <li>{isAuthenticated ? (
+            <div >
+              <span style={{color: "white"}}>{usuario.nombre}  </span>
              
               {/* ENLACE DASHBOARD solo para admin */}
               {usuario.nombre === "admin" && (
@@ -38,12 +43,12 @@ function NavBar() {
                   Dashboard
                 </Link>
               )}
-              <button onClick={cerrarSesion}>
+              <button onClick={manejarCerrarSesion} style={{padding: "5px", marginLeft: "10px", cursor: "pointer"}}>
                 Cerrar Sesión
               </button>
             </div>
           ) : (
-            <Link to="/iniciarSesion">IniciarSesión</Link>
+            <Link to="/iniciarSesion">Iniciar sesión</Link>
           )}
         </li>
 
