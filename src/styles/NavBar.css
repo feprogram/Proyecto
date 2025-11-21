@@ -15,6 +15,7 @@
     font-weight: bold;
     background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
     cursor: pointer;
+    
 }
 
 .ul {

@@ -5,11 +5,14 @@ import ShoppingCartIcon from "../assets/iconoCarrito"
 import { useAuthContext } from '../context/AuthContext'
 import { useCartContext } from '../context/CartContext'
 
+
 function NavBar() {
   
   const { isAuthenticated, usuario, carrito, cerrarSesion } = useAuthContext();
   const { vaciarCarrito } = useCartContext();
   const navigate = useNavigate();
+
+
 
  const manejarCerrarSesion = () => {
     navigate("/productos");
@@ -58,3 +61,5 @@ function NavBar() {
 }
 
 export default NavBar
+
+

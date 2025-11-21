@@ -12,7 +12,7 @@ export default function Dashboard() {
 
 
   return (
-    <div style={{ padding: '20px', minHeight: '60vh' }}>
+    <div style={{ padding: '20px', minHeight: '60vh', marginTop: "1rem" }}>
       <h1>Dashboard Administrativo</h1>
       <div style={{ background: '#f5f5f5', padding: '20px', borderRadius: '8px' }}>
         <p><strong>Sesión iniciada como: </strong> {usuario.nombre}</p>
@@ -60,7 +60,7 @@ export default function Dashboard() {
                 display: 'inline-block'
               }}
             >
-              Ver Todos los Productos
+              Ver/Editar Productos
             </Link>
           </div>
         </div>

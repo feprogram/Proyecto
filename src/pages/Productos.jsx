@@ -9,7 +9,7 @@ export default function Productos() {
   const [productos, setProductos] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
-  const [limite, setLimite] = useState(25); // Cantidad de productos visibles
+  const [limite, setLimite] = useState(8); // Cantidad de productos visibles
   const { agregarAlCarrito, carrito, setCarrito } = useCartContext();
   const navigate = useNavigate();
 
@@ -49,7 +49,11 @@ export default function Productos() {
           {productosVisibles.map((producto) => (
             <li id="lista-productos li" key={producto.id}>
               <h3 style={{ margin: "0" }}>{producto.nombre}</h3>
-              <p style={{margin:"0"}}><strong><i>{producto.categoria}</i></strong></p>
+              <p style={{ margin: "0" }}>
+                <strong>
+                  <i>{producto.categoria}</i>
+                </strong>
+              </p>
               <p style={{ margin: "0" }}>{producto.descripcion}</p>
               <img
                 src={producto.avatar}
@@ -69,13 +73,16 @@ export default function Productos() {
                   padding: "0px",
                   margin: "0",
                 }}
-                  >
-                <Link 
+              >
+                <Link
                   to={`/productos/${producto.categoria || "Sin Categoria"}/${
                     producto.id
                   }`}
-                  state={{ producto }}>
-                  <button style={{backgroundColor:"#4fe460ff"}}>+Info</button>
+                  state={{ producto }}
+                >
+                  <button style={{ backgroundColor: "#4fe460ff" }}>
+                    +Info
+                  </button>
                 </Link>
                 <button onClick={() => agregarAlCarrito(producto)}>
                   Comprar
@@ -84,10 +91,9 @@ export default function Productos() {
                 {/* Botón Editar - SOLO visible para admin */}
                 {esAdmin && (
                   <div>
-                    
                     <button
                       onClick={() =>
-                        navigate("/editar-productos", {
+                        navigate("/editarproductos", {
                           state: { producto: producto },
                         })
                       }
@@ -98,6 +104,21 @@ export default function Productos() {
                       }}
                     >
                       Editar
+                    </button>
+
+                    <button
+                      onClick={() =>
+                        navigate("/eliminarproductos", {
+                          state: { producto: producto },
+                        })
+                      }
+                      style={{
+                        backgroundColor: "red",
+                        color: "white",
+                        marginRight: "10px",
+                      }}
+                    >
+                      Eliminar
                     </button>
                   </div>
                 )}
@@ -121,9 +142,12 @@ export default function Productos() {
           </button>
         )}
       </div>
-      <div className="carrito">
-        <Carrito carrito={carrito} setCarrito={setCarrito} />
-      </div>
+
+      {!esAdmin && (
+        <div className="carrito">
+          <Carrito carrito={carrito} setCarrito={setCarrito} />
+        </div>
+      )}
     </div>
   );
 }
