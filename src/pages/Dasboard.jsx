@@ -1,14 +1,19 @@
 import React from 'react';
 import { useAuthContext } from '../context/AuthContext';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 export default function Dashboard() {
   const { usuario, cerrarSesion } = useAuthContext();
+  const navigate = useNavigate();
 
 
   // Obtener el token actual
   const tokenActual = localStorage.getItem('authToken');
+
+  const manejarAgregarProducto = () => {
+    navigate('/formulario-producto');
+  };
 
 
   return (
@@ -35,7 +40,24 @@ export default function Dashboard() {
         <div style={{ margin: '20px 0' }}>
           <h3>Acciones:</h3>
           <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginTop: '10px' }}>
-            <Link
+            
+          <button
+
+              onClick={manejarAgregarProducto}
+              style={{
+                padding: '10px 20px',
+                background: '#28a745',
+                color: 'white',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                display: 'inline-block'
+              }}
+            >
+              Agregar Nuevo Producto
+            </button>
+
+            {/* <Link
               to="/agregar-producto"
               style={{
                 padding: '10px 20px',
@@ -47,7 +69,7 @@ export default function Dashboard() {
               }}
             >
               Agregar Nuevo Producto
-            </Link>
+            </Link> */}
            
             <Link
               to="/productos"
@@ -60,7 +82,7 @@ export default function Dashboard() {
                 display: 'inline-block'
               }}
             >
-              Ver/Editar Productos
+              Ver / Editar /Eliminar Productos
             </Link>
           </div>
         </div>

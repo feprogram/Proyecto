@@ -47,6 +47,7 @@ export function AuthProvider({ children }) {
     cerrarSesion,
     isAuthenticated: !!usuario, // ← Propiedad computada. !! transforma a isAuthenticated en booleano. Si nos fijamos mas arriba la propiedad
     // usuario es null o un objeto. Entonces al poner un dato en la propiedad usuario deja de ser null para pasar a ser booleano.
+    esAdmin: usuario?.nombre === "admin", // ← Verifica si el usuario es admin
   };
 
   return (
