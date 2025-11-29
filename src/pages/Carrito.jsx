@@ -5,6 +5,8 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 // Importa el hook personalizado para acceder al contexto del carrito (estado global).
 import { useCartContext } from "../context/CartContext";
+import { formatearPrecio} from "../context/ProductsContext";
+
 
 /**
  * @component CarritoCompras
@@ -37,10 +39,8 @@ export default function CarritoCompras() {
     navigate("/pagar", { state: { carrito } });
   };
   /*
-  // Nota: La línea comentada sugiere que la función 'total' se está obteniendo
-  // directamente del contexto (useCartContext), lo cual es más eficiente
+  // La función 'total' se está obteniendo directamente del contexto (useCartContext), lo cual es más eficiente
   // ya que evita recalcular el total en cada render si ya se calcula en el contexto.
-  // const total = carrito.reduce((sum, item) => sum + Number(item.precio), 0);
   */
 
   // 4. Renderización del Componente
@@ -58,7 +58,9 @@ export default function CarritoCompras() {
             // La key es crucial para la eficiencia de React al renderizar listas.
             <div key={item.id}>
               {/* Muestra el nombre y el precio del ítem. toFixed(3) formatea el precio. */}
-              {item.nombre} - ${Number(item.precio).toFixed(3)}
+              {item.nombre} - ${formatearPrecio(item.precio)}
+            
+
               {/* Muestra la cantidad actual. */}
               (Cantidad: {item.cantidad || 1})
               {/* Botón para quitar una unidad. Llama a la función del contexto. */}
@@ -70,7 +72,7 @@ export default function CarritoCompras() {
           {/* Muestra el total de la compra */}
           <div>
             <hr />
-            Total: ${Number(total).toFixed(3)}
+            Total: $ {formatearPrecio(total)}
           </div>
           {/* Botones de acción principales */}
           <button onClick={vaciarCarrito}>Vaciar Carrito</button>
@@ -94,27 +96,4 @@ export default function CarritoCompras() {
   );
 }
 
-// ----------------------------------------------------------------------
-// Componente Secundario Exportado
-// ----------------------------------------------------------------------
 
-/**
- * @component DetalleDeLaCompra
- * @description Componente placeholder para la página de detalle de compra.
- * Actualmente solo muestra un encabezado y un botón para volver a productos.
- */
-// function DetalleDeLaCompra() {
-//   return (
-//     <div>
-//       <h1 style={{ margin: "7rem" }}>Detalle de mi Compra</h1>
-//       <hr />
-//       {/* Utiliza Link para una navegación sencilla y declarativa a "/productos" */}
-//       <Link to="/productos">
-//         <button>Seguir Comprando</button>
-//       </Link>
-//     </div>
-//   );
-// }
-
-// // Exporta el componente secundario para ser usado en otros archivos.
-// export { DetalleDeLaCompra };

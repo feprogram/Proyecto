@@ -1,10 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import "../styles/Productos.css";
-import CarritoCompras from "../componentes/Carrito";
+import CarritoCompras from "./Carrito";
 import { useCartContext } from "../context/CartContext";
 import { useAuthContext } from "../context/AuthContext";
-import { useProducts} from "../context/ProductsContext";
+import { useProducts, formatearPrecio } from "../context/ProductsContext";
+import styled from "styled-components";
 
 export default function Productos() {
   const { productos, cargando, error } = useProducts();
@@ -29,40 +29,48 @@ export default function Productos() {
   const productosVisibles = productos.slice(0, limite);
 
   return (
-    <>
-      <div className="contenedor">
-        <div className="productos">
-          <ul id="lista-productos">
+    
+    <div className="container" style={{marginTop:"100px"}}>
+      <div className="row">
+        <div className="col-sm-9 mb-2 mb-sm-0">
+          <div className="row">
             {productosVisibles.map((producto) => (
+              <div key={producto.id} className="col-md-4 col-sm-6 mb-4">
               <ProductoItem
-                key={producto.id}
                 producto={producto}
                 esAdmin={esAdmin}
                 onEditar={() => manejarEditar(producto)}
                 onEliminar={() => manejarEliminar(producto)}
                 onAgregarCarrito={() => agregarAlCarrito(producto)}
               />
+              </div>
             ))}
-          </ul>
+          </div>
 
           {/* Botón "Ver más" solo aparece si hay más productos */}
           {limite < productos.length && (
-            <button
+            <button className="btn btn-secondary btn-sm mb-4"
               onClick={() => setLimite(limite + 10)}
-              style={{
-                padding: "10px 20px",
-                marginTop: "20px",
-                fontSize: "16px",
-                cursor: "pointer",
-              }}
             >
               Cargar más
             </button>
           )}
+        </div>
+
+        <div className="col-3 mt-4 d-none d-md-block">
+          
+          {/* Este div interno es el que manejaremos con CSS */}
+          <div style={{
+              position: 'fixed', // Lo fija a la ventana
+              top: '60px',        // Ajusta la posición debajo del Navbar (ajusta este valor)
+              width: '21.5%',     // Crucial: define el ancho fijo igual al ancho de col-3 (ajusta si la columna es diferente)
+              maxWidth: '300px'  // Opcional: define un ancho máximo para pantallas muy grandes
+          }}>
           <CarritoCompras />
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
@@ -73,145 +81,128 @@ const ProductoItem = ({
   onEliminar,
   onAgregarCarrito,
 }) => (
-  <li id="lista-productos li">
-    <h2 style={{ margin: "0" }}>{producto.nombre}</h2>
-    <p style={{ margin: "0" }}>Descripción: {producto.descripcion}</p>
-    <img src={producto.avatar} alt={producto.nombre} width="80%" />
-    <p>
-      <strong>Precio: ${producto.precio}</strong>
+
+<div className="card h-100" style={{alignItems: "center", borderRadius: "16px",
+  boxShadow: "0 0 15px hsla(0deg 0% 0% 0.5)",
+  display: "flex",
+  height: "250px",
+  justifyContent: "center"
+  
+}}>
+
+    <img className="card-img-top" src={producto.avatar} alt={producto.nombre} style={{ height: '200px', objectFit: 'cover' }} />
+    <div className="card-body d-flex flex-column">
+    <h5 className="card-title">{producto.nombre}</h5>
+    <p className="card-text text-muted">Descripción: {producto.descripcion}</p>
+    <p className="card-text mt-auto mb-3">
+      <strong>Precio: $ {formatearPrecio(producto.precio)}</strong>
     </p>
 
+   {!esAdmin && (
+   <div className="d-flex justify-content-between mb-2">
     <Link to={`/productos/${producto.id}`} state={{ producto }}>
-      <button>Más detalles</button>
+
+      <button className="btn btn-secondary btn-sm w-100">Más detalles</button>
     </Link>
 
-    <button onClick={onAgregarCarrito}>Comprar</button>
+    <button className="btn btn-primary btn-sm" style={{ width: '48%' }} onClick={onAgregarCarrito}>Comprar</button>
+
+    </div>)}
+  
 
     {/* BOTONES ADMIN - Agregar contenedor */}
     {esAdmin && (
-      <div>
-        <hr />
-        <button onClick={onEditar}>
-          Editar
-        </button>
-        <button onClick={onEliminar}>
-          Eliminar
-        </button>
+      <div className="d-flex justify-content-between pt-2 border-top">
+                    {/* d-grid gap-2: Agrupa los botones y les da espacio
+                       justify-content-md-center: Centra el grupo en el div */}
+        
+        <button className="btn btn-info btn-sm" style={{width: "48%"}} onClick={onEditar}>Editar</button>
+        <button className="btn btn-danger btn-sm" style={{width: "48%"}} onClick={onEliminar}>Eliminar</button>
       </div>
     )}
-  </li>
+    </div>
+
+   
+
+  </div>
 );
 
-// Autenticación
+const Card = () => {
+  return (
+    <StyledWrapper>
+      <div className="card">
+        <p className="heading">
+          Popular this month
+        </p>
+        <p>
+          Powered By
+        </p>
+        <p>Uiverse
+        </p></div>
+    </StyledWrapper>
+  );
+}
 
-//   const productosVisibles = productos.slice(0, limite);
+const StyledWrapper = styled.div`
+  .card {
+    position: relative;
+    width: 190px;
+    height: 254px;
+    background-color: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    padding: 12px;
+    gap: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
 
-//   return (
-//     <div className="contenedor">
-//       <div className="productos">
-//         <ul id="lista-productos">
-//           {productosVisibles.map((producto) => (
-//             <li id="lista-productos li" key={producto.id}>
-//               <h3 style={{ margin: "0" }}>{producto.nombre}</h3>
-//               <p style={{ margin: "0" }}>
-//                 <strong>
-//                   <i>{producto.categoria}</i>
-//                 </strong>
-//               </p>
-//               <p style={{ margin: "0" }}>{producto.descripcion}</p>
-//               <img
-//                 src={producto.avatar}
-//                 style={{ width: "50%" }}
-//                 alt={producto.nombre}
-//               />
-//               <p style={{ width: "100%", margin: "0", fontWeight: "bold" }}>
-//                 $ {producto.precio}
-//               </p>
-//               <div
-//                 style={{
-//                   display: "flex",
-//                   flexWrap: "wrap",
-//                   justifyContent: "center",
-//                   alignItems: "center",
-//                   gap: "5px",
-//                   padding: "0px",
-//                   margin: "0",
-//                 }}
-//               >
-//                 <Link
-//                   to={`/productos/${producto.categoria || "Sin Categoria"}/${
-//                     producto.id
-//                   }`}
-//                   state={{ producto }}
-//                 >
-//                   <button style={{ backgroundColor: "#4fe460ff" }}>
-//                     +Info
-//                   </button>
-//                 </Link>
-//                 <button onClick={() => agregarAlCarrito(producto)}>
-//                   Comprar
-//                 </button>
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    left: -5px;
+    margin: auto;
+    width: 200px;
+    height: 264px;
+    border-radius: 10px;
+    background: linear-gradient(-45deg, #e81cff 0%, #40c9ff 100% );
+    z-index: -10;
+    pointer-events: none;
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
 
-//                 {/* Botón Editar - SOLO visible para admin */}
-//                 {esAdmin && (
-//                   <div>
-//                     <button
-//                       onClick={() =>
-//                         navigate("/editarproductos", {
-//                           state: { producto: producto },
-//                         })
-//                       }
-//                       style={{
-//                         backgroundColor: "#28a745",
-//                         color: "white",
-//                         marginRight: "10px",
-//                       }}
-//                     >
-//                       Editar
-//                     </button>
+  .card::after {
+    content: "";
+    z-index: -1;
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(-45deg, #fc00ff 0%, #00dbde 100% );
+    transform: translate3d(0, 0, 0) scale(0.95);
+    filter: blur(20px);
+  }
 
-//                     <button
-//                       onClick={() =>
-//                         navigate("/eliminarproductos", {
-//                           state: { producto: producto },
-//                         })
-//                       }
-//                       style={{
-//                         backgroundColor: "red",
-//                         color: "white",
-//                         marginRight: "10px",
-//                       }}
-//                     >
-//                       Eliminar
-//                     </button>
-//                   </div>
-//                 )}
-//               </div>
-//             </li>
-//           ))}
-//         </ul>
+  .heading {
+    font-size: 20px;
+    text-transform: capitalize;
+    font-weight: 700;
+  }
 
-//         {/* Botón "Ver más" solo aparece si hay más productos */}
-//         {limite < productos.length && (
-//           <button
-//             onClick={() => setLimite(limite + 10)}
-//             style={{
-//               padding: "10px 20px",
-//               marginTop: "20px",
-//               fontSize: "16px",
-//               cursor: "pointer",
-//             }}
-//           >
-//             Cargar más
-//           </button>
-//         )}
-//       </div>
+  .card p:not(.heading) {
+    font-size: 14px;
+  }
 
-//       {!esAdmin && (
-//         <div className="carrito">
-//           <Carrito carrito={carrito} setCarrito={setCarrito} />
-//         </div>
-//       )}
-//     </div>
-//   );
-// }
+  .card p:last-child {
+    color: #e81cff;
+    font-weight: 600;
+  }
+
+  .card:hover::after {
+    filter: blur(30px);
+  }
+
+  .card:hover::before {
+    transform: rotate(-90deg) scaleX(1.34) scaleY(0.77);
+  }`;
+

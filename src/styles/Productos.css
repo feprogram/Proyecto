@@ -33,16 +33,6 @@
   cursor: pointer;
 }
 
-.contenedor {
-  display: flex;
-  gap: 20px;
-  min-height: 100vh;
-  /* permite que crezca si hay más contenido */
-  text-align: center;
-  box-sizing: border-box;
-  color: black;
-  background-color: #EEEEEE
-}
 
 .productos {
   flex: 3;

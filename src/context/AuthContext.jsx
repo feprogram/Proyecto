@@ -1,6 +1,6 @@
 /* useContext: contexto global donde se colocan variables de estado
 vinculadas a la autenticación que son de uso general en más de un componente*/
-import React, { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 // Crear el contexto de autenticación
 export const AuthContext = createContext();
@@ -8,6 +8,7 @@ export const AuthContext = createContext();
 // Proveedor de autenticación
 export function AuthProvider({ children }) {
   const [usuario, setUsuario] = useState(null);
+  const [cargando, setCargando] = useState(true);
 
   // Verificar token al cargar la aplicación
   useEffect(() => {
@@ -20,17 +21,21 @@ export function AuthProvider({ children }) {
         email: emailGuardado || "",
       });
     }
+
+    setCargando(false);
+
   }, []);
 
   // Función para iniciar sesión
-  const iniciarSesion = (username) => {
+  const iniciarSesion = (username, emailIngresado) => {
     const token = `fake-token-${username}`;
     localStorage.setItem("authToken", token);
+    localStorage.setItem("authEmail", emailIngresado);
 
-    const emailGuardado = localStorage.getItem("authEmail");
+   
     setUsuario({
       nombre: username,
-      email: emailGuardado || "",
+      email: emailIngresado || "",
     });
   };
 
@@ -48,6 +53,7 @@ export function AuthProvider({ children }) {
     isAuthenticated: !!usuario, // ← Propiedad computada. !! transforma a isAuthenticated en booleano. Si nos fijamos mas arriba la propiedad
     // usuario es null o un objeto. Entonces al poner un dato en la propiedad usuario deja de ser null para pasar a ser booleano.
     esAdmin: usuario?.nombre === "admin", // ← Verifica si el usuario es admin
+    cargando,
   };
 
   return (

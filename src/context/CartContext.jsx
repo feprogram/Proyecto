@@ -1,7 +1,8 @@
 /* useContext: contexto global donde se colocan variables de estado
 que son de uso general en más de un componente*/
-import React, { createContext, useContext, useState } from "react";
-
+import { createContext, useContext, useState, useEffect } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // Crear el contexto
 export const CartContext = createContext();
 
@@ -9,6 +10,24 @@ export const CartContext = createContext();
 export function CartProvider({ children }) {
   // Estado del carrito
   const [carrito, setCarrito] = useState([]);
+  const [cargaCompleta, setCargaCompleta] = useState(false); //Flag
+
+
+useEffect(() => {
+    const carritoGuardado = localStorage.getItem("carrito"); 
+    if (carritoGuardado) {
+      setCarrito(JSON.parse(carritoGuardado));
+    }
+    setCargaCompleta(true); // Marca que la carga inicial ha terminado
+  }, []); 
+
+  // Guarda el carrito en localStorage cada vez que cambia
+  useEffect(() => {
+    if (cargaCompleta) { // Solo guarda en localStorage después de la carga inicial
+      localStorage.setItem("carrito", JSON.stringify(carrito));
+    
+  }}, [carrito, cargaCompleta]);
+
 
   // Funciones para el carrito
 const agregarAlCarrito = (producto) => {
@@ -25,7 +44,7 @@ const agregarAlCarrito = (producto) => {
         return [...prevCarrito, { ...producto, cantidad: 1 }];
       }
     });
-    alert(`Producto ${producto.nombre} agregado.`);
+    toast.success(`Producto ${producto.nombre} agregado.`);
   };
 
   const vaciarCarrito = () => {

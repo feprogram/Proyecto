@@ -1,4 +1,5 @@
 import { Link, useParams, useLocation } from "react-router-dom";
+import { formatearPrecio } from "../context/ProductsContext";
 import "../styles/DetallesDelProducto.css";
 
 const ProductoDetalle = () => {
@@ -28,7 +29,7 @@ if (!producto) {
             <strong>{producto.nombre}</strong> - (SKU 759 {id})
             <br />
             <p><strong>Descripción: </strong>{producto.descripcion}</p>
-            <p><strong>Precio:</strong> ${producto.precio}</p>
+            <p><strong>Precio:</strong> ${formatearPrecio(producto.precio)}</p>
             <img src={producto.avatar} alt={producto.nombre} width="30%" />
         </li>
         

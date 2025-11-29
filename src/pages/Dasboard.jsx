@@ -1,4 +1,3 @@
-import React from 'react';
 import { useAuthContext } from '../context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -17,8 +16,8 @@ export default function Dashboard() {
 
 
   return (
-    <div style={{ padding: '20px', minHeight: '60vh', marginTop: "1rem" }}>
-      <h1>Dashboard Administrativo</h1>
+    <div className="container" style={{ marginTop: '100px' }}>
+      <h1>Dashboard</h1>
       <div style={{ background: '#f5f5f5', padding: '20px', borderRadius: '8px' }}>
         <p><strong>Sesión iniciada como: </strong> {usuario.nombre}</p>
        
@@ -56,20 +55,6 @@ export default function Dashboard() {
             >
               Agregar Nuevo Producto
             </button>
-
-            {/* <Link
-              to="/agregar-producto"
-              style={{
-                padding: '10px 20px',
-                background: '#28a745',
-                color: 'white',
-                textDecoration: 'none',
-                borderRadius: '4px',
-                display: 'inline-block'
-              }}
-            >
-              Agregar Nuevo Producto
-            </Link> */}
            
             <Link
               to="/productos"

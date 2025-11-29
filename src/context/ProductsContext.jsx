@@ -1,7 +1,7 @@
 //Este Context se utiliza en todos aquellos componentes que utilicen la misma información.
 //En lugar de repertir código en todos los componentes genero un contexto para que esos componentes utilicen la misma informaciín
 
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import { createContext, useState, useContext, useEffect } from 'react';
 
 export const ProductsContext = createContext();
 
@@ -143,3 +143,11 @@ export const useProducts = () => {
   return context;
 };
 
+//Función para formatear números a formato argentino
+
+export const formatearPrecio = (num) => {
+  return new Intl.NumberFormat('es-AR', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }).format(num);
+};

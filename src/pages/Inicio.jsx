@@ -1,33 +1,54 @@
-import React from "react";
+// Inicio.jsx
 import { Link } from "react-router-dom";
-import "../styles/Inicio.css";
-import Loader from "../componentes/Loader";
-
+import Pattern from "../componentes/Pattern";
 
 function Inicio() {
   return (
+    <Pattern>
+      <h1
+        style={{
+          fontSize: "2.8rem",
+          letterSpacing: "1px",
+          marginBottom: "1.5rem",
+          color: "#f1f1f1",
+        }}
+      >
+        Elegancia en Cada Segundo
+      </h1>
 
-    <>
-    
-    <div className="seccion-principal">
-      
-     
-      <h1 style={{ marginTop: "4rem" }}>Encontrá tu reloj en Talento</h1> 
-      <span style={{ margin: "2rem", fontSize: "1.2rem" }}>
-        La elegancia hasta en el más mínimo detalle. Relojes decididamente
-        contemporáneos para personas dinámicas con estilo atemporal con cada
-        detalle.  
-      </span>
-      <Loader/>
-      
-      <br />
-      <br />
-      <button><Link to="/productos" style={{ color: "black" }}>Elegí el tuyo</Link></button>
+      <p
+        style={{
+          fontSize: "1.2rem",
+          color: "blanchedalmond",
+          lineHeight: 1.6,
+          marginBottom: "2.5rem",
+          opacity: 0.85,
+        }}
+      >
+        Relojes decididamente contemporáneos para personas dinámicas. Estilo
+        atemporal, diseño premium y precisión suiza en cada detalle.
+      </p>
 
-    </div>
-
-
-</>
+      <Link to="/productos" style={{ textDecoration: "none" }}>
+        <button
+          style={{
+            padding: "0.9rem 2.4rem",
+            background: "#ffffff",
+            color: "#000000",
+            border: "none",
+            borderRadius: "30px",
+            fontSize: "1.1rem",
+            cursor: "pointer",
+            fontWeight: "600",
+            transition: "0.3s ease",
+          }}
+          onMouseEnter={(e) => (e.target.style.opacity = 0.85)}
+          onMouseLeave={(e) => (e.target.style.opacity = 1)}
+        >
+          Ver Colección
+        </button>
+      </Link>
+    </Pattern>
   );
 }
 

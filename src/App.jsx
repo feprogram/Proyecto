@@ -6,7 +6,7 @@ import Servicios from "./pages/Servicios";
 import Nosotros from "./pages/Nosotros";
 import NavBar from "./componentes/NavBar";
 import Contacto from "./componentes/Contacto";
-import CarritoCompras from "./componentes/Carrito";
+import CarritoCompras from "./pages/Carrito";
 import Pagar from "./componentes/Pagar";
 import Dashboard from "./pages/Dasboard";
 import RutaProtegida from "./componentes/RutaProtegida";
@@ -21,42 +21,33 @@ import EliminarProductos from "./componentes/EliminarProductos";
 // import { WhatsAppButton } from "./componentes/WhatApp1";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import { ToastContainer} from 'react-toastify';
 
 function App() {
   return (
-    <AuthProvider>
+    <AuthProvider >
       <CartProvider>
         <ProductsProvider>
-          <div className="container">
+          <div className="d-flex flex-column min-vh-100">
             <NavBar />
-            <Routes className="content">
+            <div  className="flex-grow-1">
+            
+            <Routes>
+
               //Rutas públicas a las que cualquier usuario puede acceder
               <Route path="/" element={<Inicio />} />
               <Route path="/productos" element={<Productos />} />
-              <Route path="/productos/:id" element={<ProductoDetalle />}
-              />
+              <Route path="/productos/:id" element={<ProductoDetalle />}/>
               <Route path="/servicios" element={<Servicios />} />
               <Route path="/carrito" element={<CarritoCompras />} />
               <Route path="/nosotros" element={<Nosotros />} />
               <Route path="/contacto" element={<Contacto />} />
               <Route path="/IniciarSesion" element={<IniciarSesion />} />
+
               //Rutas privadas, solo accesibles para usuarios autenticados
-              <Route
-                path="/pagar"
-                element={
-                  <RutaProtegida>
-                    <Pagar />
-                  </RutaProtegida>
-                }
+              <Route path="/pagar" element={<RutaProtegida><Pagar /></RutaProtegida>}
               />
-              <Route
-                path="/dashboard"
-                element={
-                  <RutaProtegida soloAdmin={true}>
-                    <Dashboard />
-                  </RutaProtegida>
-                }
-              />
+              <Route path="/dashboard" element={<RutaProtegida soloAdmin={true}><Dashboard /></RutaProtegida>}/>
               <Route
                 path="/formulario-producto"
                 element={
@@ -65,8 +56,6 @@ function App() {
                   </RutaProtegida>
                 }
               />
-              {/* <Route path="/editarproductos" element={<RutaProtegida soloAdmin={true}><EditarProductos/></RutaProtegida>} />
-          <Route path="/agregar-producto" element={<RutaProtegida soloAdmin={true}><AgregarProducto/></RutaProtegida>} /> */}
               <Route
                 path="/eliminarproductos"
                 element={
@@ -77,8 +66,23 @@ function App() {
               />
               <Route path="*" element={<h2>Página no encontrada</h2>} />
             </Routes>
+            </div>
             <Footer />
+                <ToastContainer
+                  position="bottom-right"
+                  autoClose={700}
+                  hideProgressBar={false}
+                  newestOnTop={false}
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss={false}
+                  draggable
+                  pauseOnHover
+                />
           </div>
+          {/* <WhatsAppButton /> */}
+
+          
         </ProductsProvider>
       </CartProvider>
     </AuthProvider>

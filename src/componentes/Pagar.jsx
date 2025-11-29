@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import "../styles/Pagar.css";
 import { useAuthContext } from "../context/AuthContext";
 import { useCartContext } from "../context/CartContext";
+import { formatearPrecio } from "../context/ProductsContext";
 
 export default function Pagar() {
   const { usuario, cerrarSesion } = useAuthContext();
@@ -9,19 +10,7 @@ export default function Pagar() {
   // const location = useLocation();
   const navigate = useNavigate();
   const tokenActual = localStorage.getItem('authtoken');
-  // // Calculo del total
-  // const total = carrito.reduce(
-  //     (suma, producto) => suma + Number(producto.precio),
-  //     0
-  // );
 
-  // Calculo del total
-  // Calcula el total x cantidad y muestra precio x unidad
-  // const total = carrito.reduce((suma, producto) => {
-  //   const cantidad = Number(producto.cantidad || 1);
-  //   const precioUnitario = Number(producto.precio || 0);
-  //   return suma + cantidad * precioUnitario;
-  // }, 0);
 
   // Función para finalizar compra
   const comprar = () => {
@@ -33,7 +22,7 @@ export default function Pagar() {
   return (
     <div className="contenedor-pagar">
       <div>
-        <h2>Hola {usuario.nombre}</h2>
+        <h2>Hola: {usuario.nombre}</h2>
         <p>Email: {usuario.email}</p>
        
         {/* Estilo para el Token */}
@@ -50,16 +39,12 @@ export default function Pagar() {
         <button onClick={cerrarSesion}>Cerrar sesión</button>
         <hr />
       </div>
-      {/* <div className="datos-usuario">
-                <h2 >Hola: {usuario.nombre}</h2>
-                <h3> {usuario.email}</h3>
-            <button onClick={cerrarSesion}>Cerrar sesión</button>
+    
+    {/* Este es el Carrito */}
 
-            </div> */}
-
-      <div className="detalle-compra">
-        <hr />
-        <h2>Tu compra:</h2>
+      <div>
+      
+        <h2 className="mb-2">Tu compra:</h2>
 
         {carrito.length > 0 ? (
           <>
@@ -69,24 +54,30 @@ export default function Pagar() {
               const subtotal = cantidad * precioUnitario;
               return (
                 <div
-                  key={producto.id}
-                  style={{ display: "flex", gap: 12, alignItems: "center" }}
+                  key={producto.id} className="container"
                 >
-                  <img src={producto.avatar} alt={producto.nombre} width="60" />
-                  <div>
-                    <div>{producto.nombre}</div>
-                    <div>
-                      Precio unidad: ${Number(precioUnitario).toFixed(3)}
+                  <div className="row row-cols-2 justify-content-md-center gap-5">
+                  <div className="col-md-auto align-self-center">
+                  <img  src={producto.avatar} alt={producto.nombre} width="60" />
+                  </div>
+                  <div className="col">
+                    <div className=" row fs-5 fw-bold text-danger">{producto.nombre}</div>
+                    <div className="row align-items-start">
+                      Precio unidad: ${formatearPrecio(precioUnitario)}
                     </div>
-                    <div>Cantidad: {cantidad}</div>
-                    <div>
-                      <strong>Subtotal: ${Number(subtotal).toFixed(3)}</strong>
+                    <div className="row align-items-start">Cantidad: {cantidad}</div>
+                    <div className="row align-items-start fw-bold">
+
+                     Subtotal: {formatearPrecio(subtotal)}
+
+
                     </div>
                   </div>
                 </div>
+                </div>
               );
             })}
-            <h3>Total a pagar: ${Number(total).toFixed(3)}</h3>
+            <h5 className="fw-bold">Total a pagar: ${formatearPrecio(total)}</h5>
           </>
         ) : (
           <p>No hay productos en el carrito</p>
