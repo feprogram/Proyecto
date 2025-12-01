@@ -12,73 +12,87 @@ const Pattern = ({ children }) => {
 };
 
 
-
 const StyledWrapper = styled.div`
   width: 100%;
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: 'Inter', sans-serif;
 
   .container {
     width: 100%;
     min-height: 100vh;
-    padding: 4rem 2rem;
-
-    /* --- Pattern completo --- */
-    --u: 5px;
-    --c1: #ededee;
-    --c2: #000000;
-    --c3: #1e1e1e;
-    --gp: 50% / calc(var(--u) * 16.9) calc(var(--u) * 12.8);
-
-    background: conic-gradient(
-          from 122deg at 50% 85.15%,
-          var(--c2) 0 58deg,
-          var(--c3) 0 116deg,
-          #fff0 0 100%
-        ) var(--gp),
-      conic-gradient(from 122deg at 50% 72.5%, var(--c1) 0 116deg, #fff0 0 100%) var(--gp),
-      conic-gradient(from 58deg at 82.85% 50%, var(--c3) 0 64deg, #fff0 0 100%) var(--gp),
-      conic-gradient(
-          from 58deg at 66.87% 50%,
-          var(--c1) 0 64deg,
-          var(--c2) 0 130deg,
-          #fff0 0 100%
-        ) var(--gp),
-      conic-gradient(from 238deg at 17.15% 50%, var(--c2) 0 64deg, #fff0 0 100%) var(--gp),
-      conic-gradient(
-          from 172deg at 33.13% 50%,
-          var(--c3) 0 66deg,
-          var(--c1) 0 130deg,
-          #fff0 0 100%
-        ) var(--gp),
-      linear-gradient(98deg, var(--c3) 0 15%, #fff0 calc(15% + 1px) 100%) var(--gp),
-      linear-gradient(-98deg, var(--c2) 0 15%, #fff0 calc(15% + 1px) 100%) var(--gp),
-      conic-gradient(
-          from -58deg at 50.25% 14.85%,
-          var(--c3) 0 58deg,
-          var(--c2) 0 116deg,
-          #fff0 0 100%
-        ) var(--gp),
-      conic-gradient(from -58deg at 50% 28.125%, var(--c1) 0 116deg, #fff0 0 100%) var(--gp),
-      linear-gradient(90deg, var(--c2) 0 50%, var(--c3) 0 100%) var(--gp);
-
+    padding: 2rem 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
+
+ background-color: #0d0d0d; /* Negro muy oscuro como base */
+    background-image: 
+      /* 1. Gradiente radial sutil para un "brillo" central de enfoque */
+      radial-gradient(
+        circle at 50% 50%,
+        rgba(30, 30, 30, 0.9) 0%,
+        rgba(13, 13, 13, 1) 100%
+      ),
+      repeating-linear-gradient(
+        0deg,
+        #1e1e1e, /* Línea oscura */
+        #1e1e1e 1px,
+        transparent 1px,
+        transparent 20px
+      ),
+          repeating-linear-gradient(
+        90deg,
+        #1e1e1e, /* Línea oscura */
+        #1e1e1e 1px,
+        transparent 1px,
+        transparent 20px
+      );
   }
 
-  /* Caja de contenido */
-  .content {
-    max-width: 650px;
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(12px);
-    padding: 3rem 2rem;
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+
+
+ .content {
+    max-width: 700px;
+    width: 90%;
+    
+    /* Efecto Glassmorphism oscuro y refinado */
+    background: rgba(13, 13, 13, 0.4); 
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    
+    padding: 3.5rem 2.5rem;
+    border-radius: 16px;
+    
+    /* Borde fino con un toque de color dorado/latón */
+    border: 1px solid rgba(201, 160, 79, 0.3); 
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    
+    color: #f0f0f0; /* Texto claro para contraste */
     text-align: center;
+    transition: all 0.3s ease-in-out;
+
+    /* Estilo para simular un borde interior de reloj */
+    &:before {
+        content: '';
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 14px;
+        pointer-events: none;
+    }
+  }
+
+  /* Responsive para móvil */
+  @media (max-width: 640px) {
+    .content {
+      padding: 2rem 1.5rem;
+    }
   }
 `;
 

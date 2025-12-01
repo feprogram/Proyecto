@@ -18,11 +18,11 @@ export default function Dashboard() {
   return (
     <div className="container" style={{ marginTop: '100px' }}>
       <h1>Dashboard</h1>
-      <div style={{ background: '#f5f5f5', padding: '20px', borderRadius: '8px' }}>
+      <div className='card' style={{ background: '#f5f5f5', padding: '20px', borderRadius: '8px' }}>
         <p><strong>Sesión iniciada como: </strong> {usuario.nombre}</p>
        
         {/* SECCIÓN DEL TOKEN */}
-        <div style={{
+        <div className="card" style={{
           background: '#e9ecef',
           padding: '10px',
           borderRadius: '4px',
@@ -37,8 +37,9 @@ export default function Dashboard() {
 
         {/* SECCIÓN DE ACCIONES ADMIN */}
         <div style={{ margin: '20px 0' }}>
-          <h3>Acciones:</h3>
-          <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginTop: '10px' }}>
+          
+          <div className='card' 
+          style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginTop: '10px' }}>
             
           <button
 

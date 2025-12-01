@@ -1,16 +1,31 @@
 # React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[TALENTO] - Tienda Virtual
 
-Currently, two official plugins are available:
+Este proyecto es una plataforma de Comercio Electrónico (E-commerce) desarrollada en React.js, enfocada en la venta de relojes. La aplicación ofrece una experiencia de usuario con funcionalidad transaccional completa y un módulo administrativo.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+✨ Características Principales
 
-## React Compiler
+E-commerce Completo: Catálogo de productos, detalles individuales y gestión de carrito de compras (agregar, quitar, vaciar).
 
-The React Compiler is not enabled on this template. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Autenticación y Autorización: Gestión de sesiones de usuario y rutas protegidas. Incluye credenciales de prueba para el acceso administrativo (Dashboard).
 
-## Expanding the ESLint configuration
+Módulo de Administración (Admin): Rutas protegidas para la gestión (CRUD) de productos.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Gestión de Estado Centralizada: Uso de React Context para manejar el estado global del Carrito (CartContext), Productos y la Autenticación (AuthContext).
+
+Diseño: Estética oscura con acentos dorados (#C9A04F), utilizando Styled Components para una experiencia visual elegante y profesional.
+
+Tecnología: Implementación de rutas con React Router DOM y estilizado responsivo con Bootstrap 5.
+
+🛠️ Tecnologías Clave
+
+Frontend: React.js (Componentes Funcionales y Hooks)
+
+Ruteo: React Router DOM
+
+Gestión de Estado: Context API
+
+Estilos: Bootstrap 5, Styled Components
+
+Notificaciones: React Toastify

@@ -45,7 +45,7 @@ export default function Productos() {
       "property"
     );
     updateMetaTag("og:type", "website", "property");
-    updateMetaTag("og:image", "https://tudominio.com/logo.jpg", "property");
+    updateMetaTag("og:image", "https://proyecto-beta-one.vercel.app/", "property");
     updateMetaTag("og:url", window.location.href, "property");
   }, []);
 
@@ -94,7 +94,6 @@ export default function Productos() {
         </div>
 
         <div className="col-3 mt-4 d-none d-md-block">
-          {/* Este div interno es el que manejaremos con CSS */}
           <div
             style={{
               position: "fixed", // Lo fija a la ventana
@@ -118,22 +117,14 @@ const ProductoItem = ({
   onEliminar,
   onAgregarCarrito,
 }) => (
-  <div
-    className="card shadow-lg  h-100"
-    style={{
-      alignItems: "center",
-      borderRadius: "16px",
-      boxShadow: "0 0 15px hsla(0deg 0% 0% 0.5)",
-      display: "flex",
-      height: "250px",
-      justifyContent: "center",
-    }}
-  >
+  
+   <StyledProductoCard className="h-100">
+  
     <img
       className="card-img-top"
       src={producto.avatar}
       alt={producto.nombre}
-      style={{ height: "200px", objectFit: "cover" }}
+      style={{ height: "100px", width: "100px" }}
     />
     <div className="card-body d-flex flex-column">
       <h5 className="card-title">{producto.nombre}</h5>
@@ -151,7 +142,7 @@ const ProductoItem = ({
           </Link>
 
           <button
-            className="btn btn-primary btn-sm"
+            className="btn btn-secondary btn-sm"
             style={{ width: "48%" }}
             onClick={onAgregarCarrito}
           >
@@ -183,7 +174,7 @@ const ProductoItem = ({
         </div>
       )}
     </div>
-  </div>
+  </StyledProductoCard>
 );
 
 const Card = () => {
@@ -198,12 +189,14 @@ const Card = () => {
   );
 };
 
+
 const StyledWrapper = styled.div`
   .card {
     position: relative;
     width: 190px;
     height: 254px;
-    background-color: #000;
+    background-color: #fff; /* Fondo blanco solicitado */
+    color: #000; /* Texto oscuro para contraste en fondo blanco */
     display: flex;
     flex-direction: column;
     justify-content: end;
@@ -259,5 +252,101 @@ const StyledWrapper = styled.div`
 
   .card:hover::before {
     transform: rotate(-90deg) scaleX(1.34) scaleY(0.77);
+  }
+`;
+
+const StyledProductoCard = styled.div`
+  /* Estilo Moderno (Glassmorphism Oscuro) */
+  background: rgba(237, 236, 245, 0.7); /* Fondo semi-transparente */
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  
+  border-radius: 16px;
+  /* Borde blanco muy sutil */
+  border: 1px solid rgba(255, 255, 255, 0.05); 
+  /* Sombra definida */
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.7); 
+  
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  color: #f0f0f0; /* Texto claro */
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+  height: 380px; 
+  text-align: center;
+
+  &:hover {
+    transform: translateY(-5px);
+    /* Efecto de brillo sutil en hover */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 255, 255, 0.1); 
+  }
+
+  .card-img-top {
+    /* Estilo para la imagen del reloj */
+    height: 120px;
+    width: 120px;
+    object-fit: contain;
+    margin-bottom: 1rem;
+    border-radius: 50%; 
+    border: 2px solid rgba(201, 160, 79, 0.1); /* Mantiene un sutil halo dorado */
+  }
+
+  .card-body {
+    padding: 0;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .card-title {
+    color: #000; /* Título en color dorado más suave */
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-text {
+    color: #000;
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+  }
+
+  strong {
+    color: #000;
+  }
+
+  /* Nuevo Estilo para el Botón Comprar (btn-primary) */
+  .btn-primary {
+    /* Botón Comprar: Plateado/Blanco Elegante */
+    background-color: #ffffff; 
+    border-color: #ffffff;
+    color: #1a1a1a; /* Texto oscuro para contraste */
+    font-weight: 600;
+    transition: all 0.2s;
+    &:hover {
+      background-color: #e0e0e0;
+      border-color: #e0e0e0;
+      transform: translateY(-1px);
+    }
+  }
+
+  .btn-secondary {
+    /* Botón de detalle */
+    background-color: transparent;
+    border-color: #555;
+    color: #000;
+    &:hover {
+      background-color: #555;
+      border-color: #555;
+    }
+  }
+
+  .btn-info, .btn-danger {
+    /* Botones de Admin */
+    font-size: 0.8rem;
   }
 `;

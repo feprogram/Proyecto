@@ -27,7 +27,7 @@ const textoAdicional = "Lorem ipsum dolor sit, amet consectetur adipisicing elit
 const Nosotros = () => {
   return (
     // Contenedor principal centrado y con margen superior para evitar el navbar fijo
-    <div className="container my-5 pt-4">
+    <div className="container my-5 pt-5">
       
 
       <div className="text-center mb-5">

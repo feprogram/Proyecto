@@ -34,11 +34,9 @@ export default function Pagar() {
           fontSize: '12px',
           wordBreak: 'break-all'
         }}>
-          <strong>Token:</strong> {tokenActual}
+          
         </div>
-        <button onClick={cerrarSesion}>Cerrar sesión</button>
-        <hr />
-      </div>
+        
     
     {/* Este es el Carrito */}
 
@@ -89,6 +87,9 @@ export default function Pagar() {
         <button onClick={() => navigate("/productos")}>
           {carrito.length > 0 ? "Seguir Comprando" : "Volver a Productos"}
         </button>
+      </div>
+      <button onClick={cerrarSesion}>Cerrar sesión</button>
+        <hr />
       </div>
     </div>
   );

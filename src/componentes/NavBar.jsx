@@ -90,7 +90,7 @@ function NavBar() {
           </ul>
 
           <ul className="navbar-nav mb-2 mb-lg-0 d-flex align-items-center">
-            <ContenedorCarrito className="nav-item">
+            <ContenedorCarrito className="nav-item me-5">
               <Link className="nav-link" to="/carrito">
                 <MdOutlineShoppingCart size={24} />
                 <ContadorCarrito>{totalItemsCarrito}</ContadorCarrito>
