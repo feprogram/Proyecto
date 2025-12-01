@@ -2,7 +2,6 @@
 que son de uso general en más de un componente*/
 import { createContext, useContext, useState, useEffect } from "react";
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 // Crear el contexto
 export const CartContext = createContext();
 

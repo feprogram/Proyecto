@@ -6,6 +6,7 @@ import { useCartContext } from "../context/CartContext";
 import { FaShoppingCart } from "react-icons/fa";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import styled from "styled-components";
+import logoTalento from "../assets/logotalento.png"
 
 function NavBar() {
   const { isAuthenticated, usuario, cerrarSesion } = useAuthContext();
@@ -30,6 +31,18 @@ function NavBar() {
   return (
     <nav className="navbar fixed-top navbar-expand-sm bg-body-tertiary ">
       <div className="container-fluid">
+
+     <Link className="navbar-brand d-flex align-items-center" to="/">
+          <img 
+            src={logoTalento} 
+            alt="Logo Talento Relojería" 
+            height="50" // Ajusta la altura del logo
+            className="d-inline-block align-text-top me-2" 
+          />
+          <div className="fw-bold text-dark fs-5">Talento</div> {/* Opcional: Nombre de la marca junto al logo */}
+        </Link>
+
+
         <button
           className="navbar-toggler "
           type="button"
@@ -48,31 +61,31 @@ function NavBar() {
             style={{ "--bs-scroll-height": "100px" }}
           >
             <li className="nav-item">
-              <Link className="nav-link active" aria-current="page" to="/">
+              <NavLinkHover className="nav-link active" aria-current="page" to="/">
                 {" "}
                 Inicio
-              </Link>
+              </NavLinkHover>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/productos">
+              <NavLinkHover className="nav-link" to="/productos">
                 Productos
-              </Link>
+              </NavLinkHover>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/servicios">
+              <NavLinkHover className="nav-link" to="/servicios">
                 Servicios
-              </Link>
+              </NavLinkHover>
             </li>
 
             <li className="nav-item">
-              <Link className="nav-link" to="/nosotros">
+              <NavLinkHover className="nav-link" to="/nosotros">
                 Nosotros
-              </Link>
+              </NavLinkHover>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/contacto">
+              <NavLinkHover className="nav-link" to="/contacto">
                 Contacto
-              </Link>
+              </NavLinkHover>
             </li>
           </ul>
 
@@ -114,9 +127,7 @@ function NavBar() {
                   </button>
                 </div>
               ) : (
-                <Link className="nav-link" to="/IniciarSesion">
-                  Iniciar sesión
-                </Link>
+               <div></div>
               )}
             </li>
           </ul>
@@ -148,4 +159,37 @@ const ContadorCarrito = styled.span`
   justify-content: center;
   font-size: 0.75rem;
   font-weight: bold;
+`;
+
+const NavLinkHover = styled(Link)`
+  /* Hereda el color base de Bootstrap para el nav-link */
+  color: var(--bs-navbar-color); 
+  text-decoration: none; /* Asegura que no haya subrayado */
+  
+  /* Agrega padding y bordes redondeados para un área de hover más grande y suave */
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-right: 5px; /* Pequeña separación entre enlaces */
+  
+  /* Configuración de la transición para suavidad */
+  transition: all 0.3s ease-in-out; 
+
+  &:hover {
+    /* 2. EFECTO DE HOVER FUERTE Y DELICADO */
+    
+    /* Fondo: Un azul primario (de Bootstrap) con baja opacidad */
+    background-color: rgba(13, 110, 253, 0.1); 
+    
+    /* Color de texto: El azul primario de Bootstrap */
+    color: var(--bs-primary) !important; 
+    
+    /* Opcional: Una sombra sutil para darle una sensación de "elevación" */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Estilo especial para el link activo (solo si necesitas un color diferente) */
+  &.active {
+    font-weight: bold;
+    color: var(--bs-primary) !important;
+  }
 `;

@@ -22,6 +22,7 @@ import EliminarProductos from "./componentes/EliminarProductos";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -71,11 +72,8 @@ function App() {
                 <ToastContainer
                   position="bottom-right"
                   autoClose={700}
-                  hideProgressBar={false}
-                  newestOnTop={false}
+                  hideProgressBar={false} 
                   closeOnClick
-                  rtl={false}
-                  pauseOnFocusLoss={false}
                   draggable
                   pauseOnHover
                 />

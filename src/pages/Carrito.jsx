@@ -38,6 +38,10 @@ export default function CarritoCompras() {
     // El segundo argumento ({ state: { carrito } }) es el estado que se pasa a la nueva ruta.
     navigate("/pagar", { state: { carrito } });
   };
+
+  const seguirComprando = () => {
+    navigate("/productos");
+  }
   /*
   // La función 'total' se está obteniendo directamente del contexto (useCartContext), lo cual es más eficiente
   // ya que evita recalcular el total en cada render si ya se calcula en el contexto.
@@ -45,55 +49,170 @@ export default function CarritoCompras() {
 
   // 4. Renderización del Componente
   return (
-    <div style={{ margin: "2rem", marginTop: "4rem" }}>
-      <hr />
-      <h2>Carrito de Compras</h2>
-      {/* Renderización condicional: Si el carrito está vacío, muestra un mensaje. */}
+    <div className="container my-5"> {/* Contenedor centrado y con margen */}
+
+    <div className="card shadow-lg border-0"> {/* Tarjeta con sombra sutil y sin borde */}
+      
+      <div className="card-header bg-white border-bottom py-3"> 
+          <h2 className="mb-0 fs-4">🛍️ Carrito de Compras</h2>
+        </div>
+      
+
+      <div className="card-body p-4">
+
       {carrito.length === 0 ? (
-        <p>El carrito está vacío</p>
+        <div className="text-center py-5">
+
+        <p className="lead text-muted">El carrito está vacío</p>
+        </div>
       ) : (
         <>
-          {/* Mapea y renderiza cada ítem del carrito */}
-          {carrito.map((item) => (
-            // La key es crucial para la eficiencia de React al renderizar listas.
-            <div key={item.id}>
-              {/* Muestra el nombre y el precio del ítem. toFixed(3) formatea el precio. */}
-              {item.nombre} - ${formatearPrecio(item.precio)}
-            
+          <div className="table-responsive">
+              <table className="table align-middle">
+                <thead>
+                  <tr className="text-muted">
+                    <th scope="col">Producto</th>
+                    <th scope="col" className="text-center">Cantidad</th>
+                    <th scope="col" className="text-end">Precio Unitario</th>
+                    <th scope="col" className="text-end">Subtotal</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {carrito.map((item) => (
+                    <tr key={item.id}>
+                      <td>
+                        <div className="fw-semibold">{item.nombre}</div>
+                        <small className="text-muted d-block">ID: {item.id}</small> 
+                      </td>
 
-              {/* Muestra la cantidad actual. */}
-              (Cantidad: {item.cantidad || 1})
-              {/* Botón para quitar una unidad. Llama a la función del contexto. */}
-              <button onClick={() => quitarCantidad(item.id)}>-</button>
-              {/* Botón para agregar una unidad. Llama a la función del contexto. */}
-              <button onClick={() => agregarCantidad(item.id)}>+</button>
+                      <td className="text-center">
+                        <div className="btn-group btn-group-sm" role="group">
+                          <button 
+                            onClick={() => quitarCantidad(item.id)}
+                            className="btn btn-outline-secondary"
+                          >
+                            -
+                          </button>
+        
+                          {/* Muestra la cantidad actual */}
+                          <span className="btn btn-light border">
+                            {item.cantidad || 1}
+                          </span>
+                          <button 
+                            onClick={() => agregarCantidad(item.id)}
+                            className="btn btn-outline-secondary"
+                          >
+                            +
+                          </button>
+                        </div>
+                      </td>
+
+                      <td className="text-end">
+                        ${formatearPrecio(item.precio)}
+                      </td>
+
+                      <td className="text-end fw-bold">
+                        ${formatearPrecio(item.precio * item.cantidad)}
+                      </td>
+
+                      <td></td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
-          ))}
-          {/* Muestra el total de la compra */}
-          <div>
-            <hr />
-            Total: $ {formatearPrecio(total)}
-          </div>
-          {/* Botones de acción principales */}
-          <button onClick={vaciarCarrito}>Vaciar Carrito</button>
-          <button onClick={irAPagar}>Pagar</button>
 
-          {/* Renderización condicional del botón "Seguir Comprando" */}
-          <div>
-            {/* El botón solo se muestra si el path actual es exactamente "/carrito".
-                Esto previene que se muestre en rutas donde ya no es necesario (ej. en /productos). */}
-            {currentPath === "/carrito" && (
-              // Navega a la ruta /productos cuando se hace clic.
-              <button onClick={() => navigate("/productos")}>
-                Seguir Comprando
-              </button>
-            )}
-          </div>
-        </>
-      )}
-      <hr />
+
+         <hr className="my-4" /> {/* Separador moderno */}
+
+         {/* Resumen y Botones de Acción */}
+            <div className="d-flex justify-content-end mb-3">
+                <h4 className="me-3">Total:</h4>
+                <h4 className="fw-bold text-success">${formatearPrecio(total)}</h4>
+            </div>
+
+            <div className="d-flex justify-content-between align-items-center">
+                
+                {/* Botón para seguir comprando (a la izquierda) */}
+                {currentPath === "/carrito" && (
+                    <button 
+                        onClick={seguirComprando} 
+                        className="btn btn-outline-secondary me-2"
+                    >
+                        &larr; Seguir Comprando
+                    </button>
+                )}
+                
+                {/* Botones de acción (a la derecha) */}
+                <div>
+                    <button 
+                        onClick={vaciarCarrito} 
+                        className="btn btn-outline-danger me-2"
+                    >
+                        Vaciar Carrito
+                    </button>
+                    {/* Botón principal (Pagar) con énfasis */}
+                    <button 
+                        onClick={irAPagar} 
+                        className="btn btn-success"
+                    >
+                        Proceder al Pago &rarr;
+                    </button>
+                </div>
+            </div>
+          </>
+        )}
+        </div>
+      </div>
     </div>
   );
 }
+
+          
+//           {/* Mapea y renderiza cada ítem del carrito */}
+//           {carrito.map((item) => (
+//             // La key es crucial para la eficiencia de React al renderizar listas.
+//             <div key={item.id}>
+//               {/* Muestra el nombre y el precio del ítem. toFixed(3) formatea el precio. */}
+//               {item.nombre} - ${formatearPrecio(item.precio)}
+            
+
+//               {/* Muestra la cantidad actual. */}
+//               (Cantidad: {item.cantidad || 1})
+//               {/* Botón para quitar una unidad. Llama a la función del contexto. */}
+//               <button onClick={() => quitarCantidad(item.id)}>-</button>
+//               {/* Botón para agregar una unidad. Llama a la función del contexto. */}
+//               <button onClick={() => agregarCantidad(item.id)}>+</button>
+//             </div>
+//           ))}
+//           {/* Muestra el total de la compra */}
+//           <div>
+//             <hr />
+//             Total: $ {formatearPrecio(total)}
+//           </div>
+//           {/* Botones de acción principales */}
+//           <button onClick={vaciarCarrito}>Vaciar Carrito</button>
+//           <button onClick={irAPagar}>Pagar</button>
+
+//           {/* Renderización condicional del botón "Seguir Comprando" */}
+//           <div>
+//             {/* El botón solo se muestra si el path actual es exactamente "/carrito".
+//                 Esto previene que se muestre en rutas donde ya no es necesario (ej. en /productos). */}
+//             {currentPath === "/carrito" && (
+//               // Navega a la ruta /productos cuando se hace clic.
+//               <button onClick={() => navigate("/productos")}>
+//                 Seguir Comprando
+//               </button>
+//             )}
+//           </div>
+//         </>
+//       )}
+//       <hr />
+//       </div>
+//     </div>
+//     </div>
+//   );
+// }
 
 
