@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import CarritoCompras from "./Carrito";
+import MiniCarrito from "../componentes/MiniCarrito";
 import { useCartContext } from "../context/CartContext";
 import { useAuthContext } from "../context/AuthContext";
 import { useProducts, formatearPrecio } from "../context/ProductsContext";
@@ -102,7 +102,7 @@ export default function Productos() {
               maxWidth: "300px", // Opcional: define un ancho máximo para pantallas muy grandes
             }}
           >
-            <CarritoCompras />
+            <MiniCarrito />
           </div>
         </div>
       </div>

@@ -6,7 +6,7 @@ import { useCartContext } from "../context/CartContext";
 import { FaShoppingCart } from "react-icons/fa";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import styled from "styled-components";
-import logoTalento from "../assets/logotalento.png"
+import logoTalento from "../assets/logotalento.png";
 
 function NavBar() {
   const { isAuthenticated, usuario, cerrarSesion } = useAuthContext();
@@ -31,17 +31,16 @@ function NavBar() {
   return (
     <nav className="navbar fixed-top navbar-expand-sm bg-body-tertiary ">
       <div className="container-fluid">
-
-     <Link className="navbar-brand d-flex align-items-center" to="/">
-          <img 
-            src={logoTalento} 
-            alt="Logo Talento Relojería" 
+        <Link className="navbar-brand d-flex align-items-center" to="/">
+          <img
+            src={logoTalento}
+            alt="Logo Talento Relojería"
             height="50" // Ajusta la altura del logo
-            className="d-inline-block align-text-top me-2" 
+            className="d-inline-block align-text-top me-2"
           />
-          <div className="fw-bold text-dark fs-5">Talento</div> {/* Opcional: Nombre de la marca junto al logo */}
+          <div className="fw-bold text-dark fs-5">Talento</div>{" "}
+          {/* Opcional: Nombre de la marca junto al logo */}
         </Link>
-
 
         <button
           className="navbar-toggler "
@@ -61,7 +60,11 @@ function NavBar() {
             style={{ "--bs-scroll-height": "100px" }}
           >
             <li className="nav-item">
-              <NavLinkHover className="nav-link active" aria-current="page" to="/">
+              <NavLinkHover
+                className="nav-link active"
+                aria-current="page"
+                to="/"
+              >
                 {" "}
                 Inicio
               </NavLinkHover>
@@ -82,6 +85,14 @@ function NavBar() {
                 Nosotros
               </NavLinkHover>
             </li>
+
+            <li className="nav-item">
+              {isAuthenticated && usuario.nombre === "admin" && (
+                <NavLinkHover className="nav-link" to="/dashboard">
+                  Dashboard
+                </NavLinkHover>
+              )}
+            </li>
             <li className="nav-item">
               <NavLinkHover className="nav-link" to="/contacto">
                 Contacto
@@ -89,48 +100,46 @@ function NavBar() {
             </li>
           </ul>
 
-          <ul className="navbar-nav mb-2 mb-lg-0 d-flex align-items-center">
+        
+
+          <ul>
+            <li className="nav-item dropdown align-items-center mb-2 mb-lg-0 d-flex">
+              {!isAuthenticated ? (
+                <Link className="btn btn-dark" to="/IniciarSesion">
+                  Iniciar Sesión
+                </Link>
+              ) : (
+                <>
+                  <button
+                    className="btn btn-dark dropdown-toggle"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    {usuario.nombre}
+                  </button>
+                  <ul className="dropdown-menu dropdown-menu-dark">
+                    <li className="dropdown-item btn">{usuario.email}</li>
+                    <li
+                      className="dropdown-item btn"
+                      onClick={manejarCerrarSesion}
+                    >
+                      Cerrar sesión
+                    </li>
+                  </ul>
+                </>
+              )}
+            </li>
+          </ul>
+
+  <ul className="navbar-nav mb-2 mb-lg-0 d-flex align-items-center">
             <ContenedorCarrito className="nav-item me-5">
               <Link className="nav-link" to="/carrito">
                 <MdOutlineShoppingCart size={24} />
                 <ContadorCarrito>{totalItemsCarrito}</ContadorCarrito>
               </Link>
             </ContenedorCarrito>
-
-            <li className="nav-item">
-              {isAuthenticated ? (
-                <div className="d-flex align-items-center">
-                  {" "}
-                  {/* Usar flex para alinear */}
-                  <span style={{ color: "white" }}>{usuario.nombre} </span>
-                  {/* Componente de Iniciar Sesión / Info de Usuario */}
-                  {/* ENLACE DASHBOARD solo para admin */}
-                  {usuario.nombre === "admin" && (
-                    <Link
-                      className="btn btn-primary"
-                      to="/dashboard"
-                      style={{ margin: "0 10px" }}
-                    >
-                      Dashboard
-                    </Link>
-                  )}
-                  <button
-                    className="btn btn-secondary"
-                    onClick={manejarCerrarSesion}
-                    style={{
-                      padding: "5px",
-                      marginLeft: "10px",
-                      cursor: "pointer",
-                    }}
-                  >
-                    Cerrar Sesión
-                  </button>
-                </div>
-              ) : (
-               <div></div>
-              )}
-            </li>
           </ul>
+
         </div>
       </div>
     </nav>
@@ -138,7 +147,6 @@ function NavBar() {
 }
 
 export default NavBar;
-
 
 const ContenedorCarrito = styled.div`
   position: relative;
@@ -163,30 +171,30 @@ const ContadorCarrito = styled.span`
 
 const NavLinkHover = styled(Link)`
   /* Hereda el color base de Bootstrap para el nav-link */
-  color: var(--bs-navbar-color); 
+  color: var(--bs-navbar-color);
   text-decoration: none; /* Asegura que no haya subrayado */
-  
+
   /* Agrega padding y bordes redondeados para un área de hover más grande y suave */
   padding: 8px 12px;
   border-radius: 6px;
   margin-right: 5px; /* Pequeña separación entre enlaces */
-  
+
   /* Configuración de la transición para suavidad */
-  transition: all 0.3s ease-in-out; 
+  transition: all 0.3s ease-in-out;
 
   &:hover {
     /* 2. EFECTO DE HOVER FUERTE Y DELICADO */
-    
+
     /* Fondo: Un azul primario (de Bootstrap) con baja opacidad */
-    background-color: rgba(13, 110, 253, 0.1); 
-    
+    background-color: rgba(13, 110, 253, 0.1);
+
     /* Color de texto: El azul primario de Bootstrap */
-    color: var(--bs-primary) !important; 
-    
+    color: var(--bs-primary) !important;
+
     /* Opcional: Una sombra sutil para darle una sensación de "elevación" */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   }
-  
+
   /* Estilo especial para el link activo (solo si necesitas un color diferente) */
   &.active {
     font-weight: bold;

@@ -18,7 +18,7 @@ import { CartProvider } from "./context/CartContext";
 import { ProductsProvider } from "./context/ProductsContext";
 import FormularioProducto from "./componentes/FormularioProducto";
 import EliminarProductos from "./componentes/EliminarProductos";
-// import { WhatsAppButton } from "./componentes/WhatApp1";
+import WhatsAppButton from "./componentes/WhatApp1";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { ToastContainer} from 'react-toastify';
@@ -31,8 +31,8 @@ function App() {
         <ProductsProvider>
           <div className="d-flex flex-column min-vh-100">
             <NavBar />
+            <WhatsAppButton/>
             <div  className="flex-grow-1">
-            
             <Routes>
 
               //Rutas públicas a las que cualquier usuario puede acceder
@@ -66,6 +66,7 @@ function App() {
                 }
               />
               <Route path="*" element={<h2>Página no encontrada</h2>} />
+             
             </Routes>
             </div>
             <Footer />
@@ -78,7 +79,7 @@ function App() {
                   pauseOnHover
                 />
           </div>
-          {/* <WhatsAppButton /> */}
+
 
           
         </ProductsProvider>

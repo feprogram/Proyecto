@@ -77,7 +77,7 @@ const AppleColors = {
   blue: '#007aff', // Azul principal para enfoque y botones
   lightGrey: '#f5f5f7', // Gris muy claro para fondos sutiles
   borderGrey: '#d1d1d6', // Gris para bordes de inputs
-  errorRed: '#ff3b30', // Rojo para alertas y estados inválidos
+  errorRed: '#3037ffff', // Rojo para alertas y estados inválidos
   text: '#1c1c1e', // Color de texto oscuro
 };
 

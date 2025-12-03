@@ -4,7 +4,9 @@ import Pattern from "../componentes/Pattern";
 
 function Inicio() {
   return (
-    <Pattern>
+
+    <div style={{background:"black", height:"95vh" }}>
+    <Pattern style={{overflow: "hidden"}}>
       <h1
         style={{
           fontSize: "2.8rem",
@@ -49,6 +51,7 @@ function Inicio() {
         </button>
       </Link>
     </Pattern>
+    </div>
   );
 }
 
