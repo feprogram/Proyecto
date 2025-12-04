@@ -11,7 +11,9 @@ export default function Productos() {
   const { agregarAlCarrito } = useCartContext();
   const { esAdmin } = useAuthContext();
   const navigate = useNavigate();
-  const [limite, setLimite] = useState(8); // Cantidad de productos visibles
+  // const [limite, setLimite] = useState(8); // Cantidad de productos visibles
+  const [busqueda, setBusqueda] = useState("");
+  const [paginaActual, setPaginaActual] = useState(1);
 
   useEffect(() => {
     document.title = "Relojes | Productos";
@@ -45,9 +47,15 @@ export default function Productos() {
       "property"
     );
     updateMetaTag("og:type", "website", "property");
-    updateMetaTag("og:image", "https://proyecto-beta-one.vercel.app/", "property");
+    updateMetaTag(
+      "og:image",
+      "https://proyecto-beta-one.vercel.app/",
+      "property"
+    );
     updateMetaTag("og:url", window.location.href, "property");
   }, []);
+
+  const productosPorPagina = 6;
 
   const manejarEliminar = (producto) => {
     // Navegar a la página de confirmación de eliminación
@@ -59,54 +67,130 @@ export default function Productos() {
     navigate("/formulario-producto", { state: { producto } });
   };
 
+  const productosFiltrados = productos.filter(
+    (producto) =>
+      producto.nombre.toLowerCase().includes(busqueda.toLowerCase()) ||
+      (producto.categoria &&
+        producto.categoria.toLowerCase().includes(busqueda.toLowerCase()))
+  );
+
+  const indiceUltimoProducto = paginaActual * productosPorPagina;
+  const indicePrimerProducto = indiceUltimoProducto - productosPorPagina;
+  const productosActuales = productosFiltrados.slice(
+    indicePrimerProducto,
+    indiceUltimoProducto
+  );
+
+  // Cambiar de página
+  const totalPaginas = Math.ceil(
+    productosFiltrados.length / productosPorPagina
+  );
+  const cambiarPagina = (numeroPagina) => setPaginaActual(numeroPagina);
+
+  // Resetear a página 1 con búsquedas
+  const manejarBusqueda = (e) => {
+    setBusqueda(e.target.value);
+    setPaginaActual(1);
+  };
+
   if (cargando) return <p>Cargando productos...</p>;
   if (error) return <p>{error}</p>;
 
-  const productosVisibles = productos.slice(0, limite);
+  // const productosVisibles = productos.slice(0, limite);
 
   return (
-    <div className="container" style={{ marginTop: "100px" }}>
-      <div className="row">
-        <div className="col-sm-9 mb-2 mb-sm-0">
-          <div className="row">
-            {productosVisibles.map((producto) => (
-              <div key={producto.id} className="col-md-4 col-sm-6 mb-4">
-                <ProductoItem
-                  producto={producto}
-                  esAdmin={esAdmin}
-                  onEditar={() => manejarEditar(producto)}
-                  onEliminar={() => manejarEliminar(producto)}
-                  onAgregarCarrito={() => agregarAlCarrito(producto)}
-                />
-              </div>
-            ))}
-          </div>
-
-          {/* Botón "Ver más" solo aparece si hay más productos */}
-          {limite < productos.length && (
-            <button
-              className="btn btn-secondary btn-sm mb-4"
-              onClick={() => setLimite(limite + 10)}
-            >
-              Cargar más
-            </button>
-          )}
-        </div>
-
-        <div className="col-3 mt-4 d-none d-md-block">
-          <div
-            style={{
-              position: "fixed", // Lo fija a la ventana
-              top: "60px", // Ajusta la posición debajo del Navbar (ajusta este valor)
-              width: "21.5%", // Crucial: define el ancho fijo igual al ancho de col-3 (ajusta si la columna es diferente)
-              maxWidth: "300px", // Opcional: define un ancho máximo para pantallas muy grandes
-            }}
-          >
-            <MiniCarrito />
+    <>
+      <div className="container" style={{ marginTop: "60px" }}>
+        {/* Barra de búsqueda */}
+        <div className="row mb-4">
+          <div className="col-12 col-md-6">
+            <label className="form-label fw-bold"></label>
+            <input
+              type="text"
+              placeholder="Buscar por nombre o categoría..."
+              className="form-control"
+              value={busqueda}
+              onChange={manejarBusqueda}
+            />
+            {busqueda && (
+              <small className="text-muted">
+                Mostrando {productosFiltrados.length} de {productos.length}{" "}
+                productos
+              </small>
+            )}
           </div>
         </div>
       </div>
-    </div>
+
+      <div className="container mt-4" >
+        <div className="row">
+          <div className="col-sm-9 mb-2 mb-sm-0">
+            <div className="row">
+              {productosActuales.map((producto) => (
+                <div key={producto.id} className="col-md-4 col-sm-6 mb-4">
+                  <ProductoItem
+                    producto={producto}
+                    esAdmin={esAdmin}
+                    onEditar={() => manejarEditar(producto)}
+                    onEliminar={() => manejarEliminar(producto)}
+                    onAgregarCarrito={() => agregarAlCarrito(producto)}
+                  />
+                </div>
+              ))}
+            </div>
+
+            {/* Botón "Ver más" solo aparece si hay más productos */}
+            {/* {limite < productos.length && (
+              <button
+                className="btn btn-secondary btn-sm mb-4"
+                onClick={() => setLimite(limite + 10)}
+              >
+                Cargar más
+              </button>
+            )} */}
+          </div>
+
+          <div className="col-3 mt-4 d-none d-md-block">
+            <div
+              style={{
+                position: "fixed", // Lo fija a la ventana
+                top: "60px", // Ajusta la posición debajo del Navbar (ajusta este valor)
+                width: "21.5%", // Crucial: define el ancho fijo igual al ancho de col-3 (ajusta si la columna es diferente)
+                maxWidth: "300px", // Opcional: define un ancho máximo para pantallas muy grandes
+              }}
+            >
+              <MiniCarrito />
+            </div>
+          </div>
+        </div>
+
+{/* Paginador - Estilo simplificado */}
+        {productosFiltrados.length > productosPorPagina && (
+          <div className="d-flex justify-content-center my-4">
+            {Array.from({ length: totalPaginas }, (_, index) => (
+              <button
+                key={index + 1}
+                className={`btn mx-1 ${paginaActual === index + 1 ? "btn-primary" : "btn-outline-primary"}`}
+                onClick={() => cambiarPagina(index + 1)}
+              >
+                {index + 1}
+              </button>
+            ))}
+          </div>
+        )}
+
+
+        {/* Información de la página actual */}
+        {productosFiltrados.length > 0 && (
+          <div className="text-center text-muted mt-2">
+            <small>
+              Mostrando {productosActuales.length} productos
+              (página {paginaActual} de {totalPaginas})
+            </small>
+          </div>
+        )}
+      </div>
+    </>
   );
 }
 
@@ -117,9 +201,7 @@ const ProductoItem = ({
   onEliminar,
   onAgregarCarrito,
 }) => (
-  
-   <StyledProductoCard className="h-100">
-  
+  <StyledProductoCard className="h-100">
     <img
       className="card-img-top"
       src={producto.avatar}
@@ -188,7 +270,6 @@ const Card = () => {
     </StyledWrapper>
   );
 };
-
 
 const StyledWrapper = styled.div`
   .card {
@@ -260,13 +341,13 @@ const StyledProductoCard = styled.div`
   background: rgba(237, 236, 245, 0.7); /* Fondo semi-transparente */
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
-  
+
   border-radius: 16px;
   /* Borde blanco muy sutil */
-  border: 1px solid rgba(255, 255, 255, 0.05); 
+  border: 1px solid rgba(255, 255, 255, 0.05);
   /* Sombra definida */
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.7); 
-  
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.7);
+
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   color: #f0f0f0; /* Texto claro */
   overflow: hidden;
@@ -276,13 +357,14 @@ const StyledProductoCard = styled.div`
   justify-content: center;
   align-items: center;
   padding: 1.5rem;
-  height: 380px; 
+  height: 380px;
   text-align: center;
 
   &:hover {
     transform: translateY(-5px);
     /* Efecto de brillo sutil en hover */
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 255, 255, 0.1); 
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8),
+      0 0 20px rgba(255, 255, 255, 0.1);
   }
 
   .card-img-top {
@@ -291,7 +373,7 @@ const StyledProductoCard = styled.div`
     width: 120px;
     object-fit: contain;
     margin-bottom: 1rem;
-    border-radius: 50%; 
+    border-radius: 50%;
     border: 2px solid rgba(201, 160, 79, 0.1); /* Mantiene un sutil halo dorado */
   }
 
@@ -322,7 +404,7 @@ const StyledProductoCard = styled.div`
   /* Nuevo Estilo para el Botón Comprar (btn-primary) */
   .btn-primary {
     /* Botón Comprar: Plateado/Blanco Elegante */
-    background-color: #ffffff; 
+    background-color: #ffffff;
     border-color: #ffffff;
     color: #1a1a1a; /* Texto oscuro para contraste */
     font-weight: 600;
@@ -345,7 +427,8 @@ const StyledProductoCard = styled.div`
     }
   }
 
-  .btn-info, .btn-danger {
+  .btn-info,
+  .btn-danger {
     /* Botones de Admin */
     font-size: 0.8rem;
   }

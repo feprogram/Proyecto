@@ -14,7 +14,7 @@ function Contacto() {
     e.preventDefault(); // Evita que la página se recargue
     console.log("Datos enviados:", { nombre, correo, mensaje });
 
-    // Limpiar los campos después de ejecutar el evento onSubmit
+    // Esto es para limpiar los campos después de ejecutar el evento onSubmit
     setNombre("");
     setCorreo("");
     setMensaje("");
@@ -59,11 +59,6 @@ function Contacto() {
               Enviar
             </StyledButton>
           </StyledForm>
-
-          {/* <div>
-        <p>Nombre: {nombre || 'Anónimo'}</p>
-        <p>Correo: {correo || 'No proporcionado'}</p>
-      </div> */}
         </div>
       </div>
     </div>

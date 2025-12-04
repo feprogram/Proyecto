@@ -1,5 +1,4 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import "../styles/Pagar.css";
 import { useAuthContext } from "../context/AuthContext";
 import { useCartContext } from "../context/CartContext";
 import { formatearPrecio } from "../context/ProductsContext";

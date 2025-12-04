@@ -10,7 +10,7 @@ import CarritoCompras from "./pages/Carrito";
 import Pagar from "./componentes/Pagar";
 import Dashboard from "./pages/Dasboard";
 import RutaProtegida from "./componentes/RutaProtegida";
-import IniciarSesion from "./componentes/IniciarSesion";
+import IniciarSesion from "./pages/IniciarSesion";
 import ProductoDetalle from "./componentes/DetallesDelProducto";
 import Footer from "./componentes/Footer";
 import { AuthProvider } from "./context/AuthContext";
